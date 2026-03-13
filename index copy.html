@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Weather app</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      @font-face {
+        font-family: BricolageGrotesque-bold;
+        src: url(./assets/fonts/Bricolage_Grotesque/static/BricolageGrotesque-Bold.ttf);
+      }
+      @font-face {
+        font-family: DMSans-Medium;
+        src: url(./assets/fonts/DM_Sans/static/DMSans-Medium.ttf);
+      }
+      @font-face {
+        font-family: DMSans-SemiBoldItalic;
+        src: url(./assets/fonts/DM_Sans/static/DMSans-SemiBoldItalic.ttf);
+      }
+      @font-face {
+        font-family: DMSans-SemiBold;
+        src: url(./assets/fonts/DM_Sans/static/DMSans-SemiBold.ttf);
+      }
+      @font-face {
+        font-family: DMSans-Light;
+        src: url(./assets/fonts/DM_Sans/static/DMSans-Light.ttf);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        background-color: hsl(243, 96%, 9%);
+      }
+
+      .logo-search-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      .logo {
+        height: auto;
+      }
+      .units-div {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+        height: auto;
+        background-color: hsl(243, 23%, 24%);
+      }
+      .units-div .dropdown-arrow {
+        height: auto;
+      }
+      .units-div img {
+        height: auto;
+      }
+      .units-div label {
+        font-family: DMSans-Medium;
+        color: hsl(0, 0%, 100%);
+      }
+      .how-sky-div {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        font-family: BricolageGrotesque-bold;
+        color: hsl(0, 0%, 100%);
+        text-align: center;
+      }
+
+      .search-div {
+        display: flex;
+        flex-direction: column;
+      }
+      .search-input-div {
+        background-color: hsl(243, 23%, 24%);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .search-input-div input {
+        background-color: hsl(243, 23%, 24%);
+        font-family: DMSans-SemiBold;
+        border: solid 1px hsl(243, 23%, 24%);
+        color: hsl(0, 0%, 100%);
+      }
+      ::placeholder {
+        color: hsl(240, 6%, 70%);
+        opacity: 1; /* Firefox */
+      }
+
+      ::-ms-input-placeholder {
+        /* Edge 12 -18 */
+        color: hsl(240, 6%, 70%);
+      }
+
+      .search-div button {
+        background-color: hsl(233, 67%, 56%);
+        color: hsl(0, 0%, 100%);
+        font-family: DMSans-SemiBold;
+      }
+      .today-small-div {
+        display: flex;
+        flex-direction: column;
+        background-repeat: no-repeat;
+        align-items: center;
+      }
+
+      .city-time-div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .city-label {
+        font-family: DMSans-SemiBold;
+        color: hsl(0, 0%, 100%);
+      }
+      .time-label {
+        font-family: DMSans-Medium;
+        color: hsl(250, 6%, 84%);
+      }
+      .today-icon-temp-div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .today-icon-temp-div img {
+        height: auto;
+      }
+      .today-temp-label {
+        font-family: DMSans-SemiBoldItalic;
+        color: hsl(0, 0%, 100%);
+        margin-right: 28px;
+      }
+      .today-other-col-div {
+        display: flex;
+        flex-direction: column;
+      }
+      .today-other-row-div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .each-small-div {
+        display: flex;
+        flex-direction: column;
+        background-color: hsl(243, 23%, 24%);
+      }
+      .each-small-params-label {
+        color: hsl(0, 0%, 100%);
+        font-family: DMSans-Light;
+      }
+      .each-small-value-label {
+        color: hsl(0, 0%, 100%);
+        font-family: DMSans-Light;
+      }
+      .daily-forecast-main-div {
+        display: flex;
+        flex-direction: column;
+      }
+      .daily-forecast-label {
+        font-family: DMSans-SemiBold;
+        color: hsl(0, 0%, 100%);
+      }
+      .daily-forecast-days-div-col {
+        display: flex;
+        flex-direction: column;
+      }
+      .daily-forecast-days-div-row {
+        display: flex;
+        flex-direction: row;
+      }
+      .daily-forecast-day,
+      .daily-forecast-last-day {
+        background-color: hsl(243, 23%, 24%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .each-day-label {
+        font-family: DMSans-Light;
+        color: hsl(0, 0%, 100%);
+      }
+      .each-day-img {
+        width: 5vw;
+      }
+
+      .each-day-max-min {
+        display: flex;
+        flex-direction: row;
+        font-family: DMSans-Light;
+        justify-content: space-between;
+      }
+      .each-day-max {
+        font-family: DMSans-Light;
+        color: hsl(0, 0%, 100%);
+      }
+      .each-day-min {
+        font-family: DMSans-Light;
+        color: hsl(0, 0%, 100%);
+      }
+
+      .hourly-forecast-main-div {
+        background-color: hsl(243, 23%, 24%);
+      }
+      .hourly-forecast-title-select-div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .hourly-forecast-title {
+        font-family: DMSans-SemiBold;
+        color: hsl(0, 0%, 100%);
+      }
+      .hourly-forecast-select {
+        background-color: hsl(243, 23%, 30%);
+        font-family: DMSans-SemiBold;
+        color: hsl(0, 0%, 100%);
+        text-align: center;
+        border: solid 1px hsl(243, 23%, 30%);
+      }
+      .hours-in-day-main-div {
+        display: flex;
+        flex-direction: column;
+      }
+      .each-hour-in-day {
+        background-color: hsl(243, 23%, 30%);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .each-hour-in-day img {
+        width: 12vw;
+        margin-left: 2vw;
+      }
+      .each-hour-in-day-time {
+        font-family: DMSans-Medium;
+        color: hsl(0, 0%, 100%);
+      }
+      .each-hour-in-day-temp {
+        font-family: DMSans-SemiBold;
+        color: hsl(0, 0%, 100%);
+      }
+
+      .attribution {
+        width: 100%;
+        height: auto;
+        color: hsl(0, 0%, 100%);
+        font-family: DMSans-SemiBoldItalic;
+        font-size: 3vw;
+        margin-top: 50vw;
+        text-align: center;
+      }
+      .attribution a {
+        font-size: 3vw;
+        font-family: DMSans-SemiBoldItalic;
+        text-decoration: none;
+      }
+
+      @media (max-width: 480px) {
+        .logo {
+          width: 38vw;
+          margin-left: 2vw;
+          margin-top: 2vw;
+          margin-bottom: 2vw;
+        }
+        .units-div {
+          width: 26vw;
+          border-radius: 1.6vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+          margin-bottom: 2vw;
+        }
+        .units-div .dropdown-arrow {
+          width: 2.6vw;
+        }
+        .units-div img {
+          width: 3.6vw;
+        }
+        .units-div label {
+          font-size: 3.6vw;
+        }
+        h1 {
+          font-size: 15vw;
+        }
+        .search-div {
+          margin-left: 2vw;
+          margin-right: 4vw;
+        }
+        .search-input-div {
+          border-radius: 3vw;
+          margin-bottom: 3vw;
+        }
+        .search-input-div input {
+          width: 80%;
+          height: 15vw;
+          margin-left: 5vw;
+          margin-right: 5vw;
+          font-size: 5vw;
+        }
+        .search-input-div img {
+          width: 5vw;
+          margin-left: 5vw;
+        }
+        .search-div button {
+          width: 100%;
+          height: 15vw;
+          border-radius: 3vw;
+          border: solid 2px hsl(233, 67%, 56%);
+          font-size: 5vw;
+        }
+        .today-small-div {
+          height: 75vw;
+          margin-top: 7vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+          background-size: 90vw;
+          background-image: url("./assets/images/bg-today-small.svg");
+        }
+
+        .city-time-div {
+          width: 80vw;
+          margin-top: 10vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+        }
+        .city-label {
+          font-size: 7.5vw;
+        }
+        .time-label {
+          margin-top: 2vw;
+          font-size: 4.5vw;
+        }
+        .today-icon-temp-div {
+          width: 80vw;
+          margin-top: 6vw;
+        }
+        .today-icon-temp-div img {
+          width: 30vw;
+          margin-left: 5vw;
+        }
+        .today-temp-label {
+          font-size: 18vw;
+          margin-right: 2vw;
+        }
+        .today-other-col-div {
+          display: flex;
+          flex-direction: column;
+          margin-left: 3vw;
+          margin-right: 3vw;
+          margin-top: 3vw;
+        }
+        .today-other-row-div {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          margin-right: 2vw;
+        }
+        .each-small-div {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          background-color: hsl(243, 23%, 24%);
+          width: 42vw;
+          height: 30vw;
+          border-radius: 3vw;
+          margin-bottom: 3vw;
+          margin-top: 2vw;
+        }
+        .each-small-params-label {
+          color: hsl(0, 0%, 100%);
+          font-size: 4vw;
+          margin-left: 6vw;
+        }
+        .each-small-value-label {
+          color: hsl(0, 0%, 100%);
+          font-size: 7vw;
+          margin-left: 6vw;
+        }
+        .daily-forecast-main-div {
+          width: 87vw;
+          height: 140vw;
+          margin-left: 3vw;
+          margin-right: 1.5vw;
+          margin-top: 2vw;
+        }
+        .daily-forecast-label {
+          font-family: DMSans-SemiBold;
+          color: hsl(0, 0%, 100%);
+          font-size: 5vw;
+          margin-left: 2vw;
+        }
+
+        .daily-forecast-days-div-col {
+          width: 85vw;
+          height: 130vw;
+          margin-top: 3vw;
+        }
+        .daily-forecast-days-div-row {
+          width: 85vw;
+          height: 40vw;
+          margin-bottom: 3vw;
+          margin-left: 1vw;
+          margin-right: 2vw;
+          gap: 3vw;
+        }
+        .daily-forecast-day {
+          width: 45vw;
+          height: 40vw;
+          border-radius: 3vw;
+        }
+        .daily-forecast-last-day {
+          width: 27vw;
+          height: 40vw;
+          border-radius: 3vw;
+        }
+        .each-day-label {
+          font-size: 3vw;
+          margin-top: 5vw;
+        }
+        .each-day-img {
+          width: 12vw;
+          margin-top: 4vw;
+          margin-bottom: 4vw;
+        }
+
+        .each-day-max {
+          font-size: 3vw;
+          margin-right: 3vw;
+        }
+        .each-day-min {
+          font-size: 3vw;
+          margin-left: 3vw;
+        }
+
+        .hourly-forecast-main-div {
+          width: 85vw;
+          height: 150vw;
+          margin-left: 3vw;
+          margin-right: 3vw;
+          border-radius: 3vw;
+        }
+        .hourly-forecast-title-select-div {
+          margin-top: 4vw;
+        }
+        .hourly-forecast-title {
+          font-size: 5vw;
+          margin-left: 4vw;
+          margin-top: 1.5vw;
+        }
+        .hourly-forecast-select {
+          border-radius: 2vw;
+          width: 30vw;
+          height: 8vw;
+          margin-left: 8vw;
+          font-size: 4vw;
+          margin-top: 1.5vw;
+        }
+        .hours-in-day-main-div {
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+          width: 83vw;
+          height: 130vw;
+          overflow-y: scroll;
+        }
+        .each-hour-in-day {
+          border-radius: 2vw;
+          width: 80vw;
+          height: 14vw;
+          margin-top: 5vw;
+        }
+        .each-hour-in-day img {
+          width: 12vw;
+          margin-left: 2vw;
+        }
+        .each-hour-in-day-time {
+          font-size: 4vw;
+        }
+        .each-hour-in-day-temp {
+          font-size: 4vw;
+          margin-left: 45vw;
+        }
+        .attribution {
+          font-size: 3vw;
+          margin-top: 150vw;
+        }
+        .attribution a {
+          font-size: 3vw;
+        }
+      }
+
+      @media (min-width: 480px) and (max-width: 500px) {
+        .logo {
+          width: 36vw;
+          margin-left: 2vw;
+          margin-top: 2vw;
+          margin-bottom: 2vw;
+        }
+        .units-div {
+          width: 24vw;
+          border-radius: 1.4vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+          margin-bottom: 2vw;
+        }
+        .units-div .dropdown-arrow {
+          width: 2.4vw;
+        }
+        .units-div img {
+          width: 3.4vw;
+        }
+        .units-div label {
+          font-size: 3.4vw;
+        }
+        h1 {
+          font-size: 12vw;
+        }
+        .search-div {
+          margin-left: 3vw;
+          margin-right: 3vw;
+        }
+        .search-input-div {
+          border-radius: 3vw;
+          margin-bottom: 3vw;
+        }
+        .search-input-div input {
+          width: 80%;
+          height: 10vw;
+          margin-left: 5vw;
+          margin-right: 8vw;
+          font-size: 4vw;
+        }
+        .search-input-div img {
+          width: 4vw;
+          margin-left: 5vw;
+        }
+        .search-div button {
+          width: 100%;
+          height: 10vw;
+          border-radius: 3vw;
+          border: solid 2px hsl(233, 67%, 56%);
+          font-size: 4vw;
+        }
+        .today-small-div {
+          height: 75vw;
+          margin-top: 8vw;
+          margin-left: 3vw;
+          margin-right: 3vw;
+          background-size: 90vw;
+          background-image: url("./assets/images/bg-today-small.svg");
+        }
+
+        .city-time-div {
+          width: 80vw;
+          margin-top: 10vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+        }
+        .city-label {
+          font-size: 7.5vw;
+        }
+        .time-label {
+          margin-top: 2vw;
+          font-size: 4.5vw;
+        }
+        .today-icon-temp-div {
+          width: 80vw;
+          margin-top: 5vw;
+        }
+        .today-icon-temp-div img {
+          width: 25vw;
+          margin-left: 5vw;
+        }
+        .today-temp-label {
+          font-size: 20vw;
+          margin-right: 2vw;
+        }
+        .today-other-col-div {
+          display: flex;
+          flex-direction: column;
+          margin-left: 3vw;
+          margin-right: 2.9vw;
+          margin-top: 3vw;
+        }
+        .today-other-row-div {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+        .each-small-div {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          background-color: hsl(243, 23%, 24%);
+          width: 42vw;
+          height: 30vw;
+          border-radius: 3vw;
+          margin-bottom: 3vw;
+          margin-top: 2vw;
+        }
+        .each-small-params-label {
+          color: hsl(0, 0%, 100%);
+          font-size: 4vw;
+          margin-left: 6vw;
+        }
+        .each-small-value-label {
+          color: hsl(0, 0%, 100%);
+          font-size: 7vw;
+          margin-left: 6vw;
+        }
+        .daily-forecast-main-div {
+          width: 92vw;
+          height: 140vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+        }
+        .daily-forecast-label {
+          font-family: DMSans-SemiBold;
+          color: hsl(0, 0%, 100%);
+          font-size: 5vw;
+          margin-left: 2vw;
+        }
+
+        .daily-forecast-days-div-col {
+          width: 85vw;
+          height: 130vw;
+          margin-top: 3vw;
+          margin-right: 1vw;
+        }
+        .daily-forecast-days-div-row {
+          width: 90vw;
+          height: 40vw;
+          margin-bottom: 3vw;
+          margin-left: 1vw;
+          margin-right: 2vw;
+          gap: 3vw;
+        }
+        .daily-forecast-day {
+          width: 50vw;
+          height: 40vw;
+          border-radius: 3vw;
+        }
+        .daily-forecast-last-day {
+          width: 27vw;
+          height: 40vw;
+          border-radius: 3vw;
+        }
+        .each-day-label {
+          font-size: 4vw;
+          margin-top: 5vw;
+        }
+        .each-day-img {
+          width: 14vw;
+          margin-top: 4vw;
+          margin-bottom: 4vw;
+        }
+
+        .each-day-max {
+          font-size: 4vw;
+          margin-right: 3vw;
+        }
+        .each-day-min {
+          font-size: 4vw;
+          margin-left: 3vw;
+        }
+        .hourly-forecast-main-div {
+          width: 88vw;
+          height: 150vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+          border-radius: 3vw;
+        }
+        .hourly-forecast-title-select-div {
+          margin-top: 4vw;
+        }
+        .hourly-forecast-title {
+          font-size: 5vw;
+          margin-left: 4vw;
+          margin-top: 1.5vw;
+        }
+        .hourly-forecast-select {
+          border-radius: 2vw;
+          width: 30vw;
+          height: 8vw;
+          margin-left: 8vw;
+          font-size: 4vw;
+          margin-top: 1.5vw;
+        }
+        .hours-in-day-main-div {
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+          width: 85vw;
+          height: 130vw;
+          overflow-y: scroll;
+        }
+        .each-hour-in-day {
+          border-radius: 2vw;
+          width: 80vw;
+          height: 14vw;
+          margin-top: 5vw;
+        }
+        .each-hour-in-day img {
+          width: 12vw;
+          margin-left: 2vw;
+        }
+        .each-hour-in-day-time {
+          font-size: 4vw;
+        }
+        .each-hour-in-day-temp {
+          font-size: 4vw;
+          margin-left: 45vw;
+        }
+        .attribution {
+          font-size: 2.8vw;
+          margin-top: 150vw;
+        }
+        .attribution a {
+          font-size: 2.8vw;
+        }
+      }
+      @media (min-width: 500px) and (max-width: 767px) {
+        .logo {
+          width: 32vw;
+          margin-left: 3vw;
+          margin-top: 3vw;
+          margin-bottom: 3vw;
+        }
+        .units-div {
+          width: 20vw;
+          border-radius: 1vw;
+          margin-right: 3vw;
+          margin-top: 3vw;
+          margin-bottom: 3vw;
+        }
+        .units-div .dropdown-arrow {
+          width: 2vw;
+        }
+        .units-div img {
+          width: 3vw;
+        }
+        .units-div label {
+          font-size: 3vw;
+        }
+        h1 {
+          font-size: 10vw;
+        }
+        .search-div {
+          margin-left: 2.5vw;
+          margin-right: 2.5vw;
+        }
+        .search-input-div {
+          border-radius: 2.5vw;
+          margin-bottom: 3vw;
+        }
+        .search-input-div input {
+          width: 80%;
+          height: 9vw;
+          margin-left: 5vw;
+          margin-right: 12vw;
+          font-size: 3.5vw;
+        }
+        .search-input-div img {
+          width: 3vw;
+          margin-left: 5vw;
+        }
+        .search-div button {
+          width: 100%;
+          height: 9vw;
+          border-radius: 2.5vw;
+          border: solid 2px hsl(233, 67%, 56%);
+          font-size: 3.5vw;
+        }
+        .today-small-div {
+          height: 75vw;
+          margin-top: 7vw;
+          margin-left: 3.5vw;
+          margin-right: 3.5vw;
+          background-size: 90vw;
+          background-image: url("./assets/images/bg-today-small.svg");
+        }
+
+        .city-time-div {
+          width: 80vw;
+          margin-top: 10vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+        }
+        .city-label {
+          font-size: 6vw;
+        }
+        .time-label {
+          margin-top: 2vw;
+          font-size: 3.5vw;
+        }
+        .today-icon-temp-div {
+          width: 80vw;
+          margin-top: 5vw;
+        }
+        .today-icon-temp-div img {
+          width: 25vw;
+          margin-left: 14vw;
+        }
+        .today-temp-label {
+          font-size: 18vw;
+          margin-right: 4vw;
+        }
+        .today-other-col-div {
+          display: flex;
+          flex-direction: column;
+          margin-left: 3vw;
+          margin-right: 3vw;
+          margin-top: 3vw;
+        }
+        .today-other-row-div {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+        .each-small-div {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          background-color: hsl(243, 23%, 24%);
+          width: 42vw;
+          height: 30vw;
+          border-radius: 3vw;
+          margin-bottom: 3vw;
+          margin-top: 2vw;
+        }
+        .each-small-params-label {
+          color: hsl(0, 0%, 100%);
+          font-size: 3.5vw;
+          margin-left: 6vw;
+        }
+        .each-small-value-label {
+          color: hsl(0, 0%, 100%);
+          font-size: 5.8vw;
+          margin-left: 6vw;
+        }
+        .daily-forecast-main-div {
+          width: 92vw;
+          height: 140vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+        }
+        .daily-forecast-label {
+          font-family: DMSans-SemiBold;
+          color: hsl(0, 0%, 100%);
+          font-size: 5vw;
+          margin-left: 2vw;
+        }
+
+        .daily-forecast-days-div-col {
+          width: 85vw;
+          height: 130vw;
+          margin-top: 3vw;
+          margin-right: 1vw;
+        }
+        .daily-forecast-days-div-row {
+          width: 90vw;
+          height: 40vw;
+          margin-bottom: 3vw;
+          margin-left: 1vw;
+          margin-right: 2vw;
+          gap: 3vw;
+        }
+        .daily-forecast-day {
+          width: 50vw;
+          height: 40vw;
+          border-radius: 3vw;
+        }
+        .daily-forecast-last-day {
+          width: 27vw;
+          height: 40vw;
+          border-radius: 3vw;
+        }
+        .each-day-label {
+          font-size: 4vw;
+          margin-top: 5vw;
+        }
+        .each-day-img {
+          width: 14vw;
+          margin-top: 4vw;
+          margin-bottom: 4vw;
+        }
+
+        .each-day-max {
+          font-size: 4vw;
+          margin-right: 3vw;
+        }
+        .each-day-min {
+          font-size: 4vw;
+          margin-left: 3vw;
+        }
+        .hourly-forecast-main-div {
+          width: 88vw;
+          height: 150vw;
+          margin-left: 3.5vw;
+          margin-right: 3.5vw;
+          border-radius: 3vw;
+        }
+        .hourly-forecast-title-select-div {
+          margin-top: 4vw;
+        }
+        .hourly-forecast-title {
+          font-size: 5vw;
+          margin-left: 4vw;
+          margin-top: 1.5vw;
+        }
+        .hourly-forecast-select {
+          border-radius: 2vw;
+          width: 30vw;
+          height: 8vw;
+          margin-left: 8vw;
+          font-size: 4vw;
+          margin-top: 1.5vw;
+        }
+        .hours-in-day-main-div {
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+          width: 85vw;
+          height: 130vw;
+          overflow-y: scroll;
+        }
+        .each-hour-in-day {
+          border-radius: 2vw;
+          width: 80vw;
+          height: 14vw;
+          margin-top: 5vw;
+        }
+        .each-hour-in-day img {
+          width: 12vw;
+          margin-left: 2vw;
+        }
+        .each-hour-in-day-time {
+          font-size: 4vw;
+        }
+        .each-hour-in-day-temp {
+          font-size: 4vw;
+          margin-left: 45vw;
+        }
+        .attribution {
+          font-size: 2.8vw;
+          margin-top: 150vw;
+        }
+        .attribution a {
+          font-size: 2.8vw;
+        }
+      }
+      @media (min-width: 767px) and (max-width: 900px) {
+        .logo {
+          width: 28vw;
+          margin-left: 4vw;
+          margin-top: 4vw;
+          margin-bottom: 4vw;
+        }
+        .units-div {
+          width: 16vw;
+          border-radius: 1.2vw;
+          margin-right: 4vw;
+          margin-top: 4vw;
+          margin-bottom: 4vw;
+        }
+        .units-div .dropdown-arrow {
+          width: 1vw;
+        }
+        .units-div img {
+          width: 2vw;
+        }
+        .units-div label {
+          font-size: 2vw;
+        }
+        h1 {
+          font-size: 8vw;
+        }
+        .search-div {
+          margin-left: 6vw;
+          margin-right: 6vw;
+        }
+        .search-input-div {
+          border-radius: 2.5vw;
+          margin-bottom: 3vw;
+        }
+        .search-input-div input {
+          width: 80%;
+          height: 8vw;
+          margin-left: 5vw;
+          margin-right: 12vw;
+          font-size: 3.5vw;
+        }
+        .search-input-div img {
+          width: 3vw;
+          margin-left: 5vw;
+        }
+        .search-div button {
+          width: 100%;
+          height: 8vw;
+          border-radius: 2.5vw;
+          border: solid 2px hsl(233, 67%, 56%);
+          font-size: 3.5vw;
+        }
+        .today-small-div {
+          height: 75vw;
+          margin-top: 6vw;
+          margin-left: 6vw;
+          margin-right: 6vw;
+          background-size: 85vw;
+          background-image: url("./assets/images/bg-today-small.svg");
+        }
+
+        .city-time-div {
+          width: 80vw;
+          margin-top: 10vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+        }
+        .city-label {
+          font-size: 6vw;
+        }
+        .time-label {
+          margin-top: 2vw;
+          font-size: 3.5vw;
+        }
+        .today-icon-temp-div {
+          width: 80vw;
+          margin-top: 5vw;
+        }
+        .today-icon-temp-div img {
+          width: 25vw;
+          margin-left: 14vw;
+        }
+        .today-temp-label {
+          font-size: 18vw;
+          margin-right: 4vw;
+        }
+        .today-other-col-div {
+          display: flex;
+          flex-direction: column;
+          margin-left: 7vw;
+          margin-right: 7vw;
+          margin-top: 2vw;
+        }
+        .today-other-row-div {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+        .each-small-div {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          background-color: hsl(243, 23%, 24%);
+          width: 40vw;
+          height: 30vw;
+          border-radius: 3vw;
+          margin-bottom: 3vw;
+          margin-top: 1vw;
+        }
+        .each-small-params-label {
+          color: hsl(0, 0%, 100%);
+          font-size: 3vw;
+          margin-left: 6vw;
+        }
+        .each-small-value-label {
+          color: hsl(0, 0%, 100%);
+          font-size: 5.2vw;
+          margin-left: 6vw;
+        }
+        .daily-forecast-main-div {
+          width: 92vw;
+          height: 140vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+        }
+        .daily-forecast-label {
+          font-family: DMSans-SemiBold;
+          color: hsl(0, 0%, 100%);
+          font-size: 5vw;
+          margin-left: 5vw;
+        }
+
+        .daily-forecast-days-div-col {
+          width: 87vw;
+          height: 130vw;
+          margin-top: 3vw;
+          margin-right: 1vw;
+        }
+        .daily-forecast-days-div-row {
+          width: 82vw;
+          height: 40vw;
+          margin-bottom: 3vw;
+          margin-left: 5vw;
+          margin-right: 0.5vw;
+          gap: 3vw;
+        }
+        .daily-forecast-day {
+          width: 50vw;
+          height: 40vw;
+          border-radius: 3vw;
+        }
+        .daily-forecast-last-day {
+          width: 27vw;
+          height: 40vw;
+          border-radius: 3vw;
+        }
+        .each-day-label {
+          font-size: 3.5vw;
+          margin-top: 5vw;
+        }
+        .each-day-img {
+          width: 14vw;
+          margin-top: 4vw;
+          margin-bottom: 4vw;
+        }
+
+        .each-day-max {
+          font-size: 3.5vw;
+          margin-right: 3vw;
+        }
+        .each-day-min {
+          font-size: 3.5vw;
+          margin-left: 3vw;
+        }
+        .hourly-forecast-main-div {
+          width: 88vw;
+          height: 150vw;
+          margin-left: 6vw;
+          margin-right: 6vw;
+          border-radius: 3vw;
+        }
+        .hourly-forecast-title-select-div {
+          margin-top: 4vw;
+        }
+        .hourly-forecast-title {
+          font-size: 5vw;
+          margin-left: 4vw;
+          margin-top: 1.5vw;
+        }
+        .hourly-forecast-select {
+          border-radius: 2vw;
+          width: 30vw;
+          height: 8vw;
+          margin-left: 8vw;
+          font-size: 4vw;
+          margin-top: 1.5vw;
+        }
+        .hours-in-day-main-div {
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+          width: 85vw;
+          height: 130vw;
+          overflow-y: scroll;
+        }
+        .each-hour-in-day {
+          border-radius: 2vw;
+          width: 80vw;
+          height: 14vw;
+          margin-top: 5vw;
+        }
+        .each-hour-in-day img {
+          width: 12vw;
+          margin-left: 2vw;
+        }
+        .each-hour-in-day-time {
+          font-size: 4vw;
+        }
+        .each-hour-in-day-temp {
+          font-size: 4vw;
+          margin-left: 45vw;
+        }
+        .attribution {
+          font-size: 2.8vw;
+          margin-top: 150vw;
+        }
+        .attribution a {
+          font-size: 2.8vw;
+        }
+      }
+      @media (min-width: 901px) and (max-width: 1024px) {
+        .container-main {
+          display: flex;
+          flex-direction: row;
+          width: 100vw;
+          height: 200vw;
+          border: solid 1px yellow;
+        }
+        .logo {
+          width: 13vw;
+          margin-left: 6vw;
+          margin-top: 2vw;
+          margin-bottom: 2vw;
+        }
+        .units-div {
+          width: 8vw;
+          border-radius: 0.4vw;
+          margin-right: 6vw;
+          margin-top: 2vw;
+          margin-bottom: 2vw;
+        }
+        .units-div .dropdown-arrow {
+          width: 0.9vw;
+        }
+        .units-div img {
+          width: 1.3vw;
+        }
+        .units-div label {
+          font-size: 1.3vw;
+        }
+        h1 {
+          font-size: 3.8vw;
+        }
+        .search-div {
+          flex-direction: row;
+        }
+        .search-input-div {
+          margin-left: 26vw;
+          margin-right: 0.1vw;
+          border-radius: 0.7vw;
+          height: 4vw;
+          width: 37vw;
+        }
+        .search-input-div input {
+          width: 40vw;
+          height: 4vw;
+          margin-left: 1.5vw;
+          margin-right: 1vw;
+          font-size: 1.5vw;
+        }
+        .search-input-div img {
+          width: 1.5vw;
+          margin-left: 1.5vw;
+        }
+        .search-div button {
+          height: 4vw;
+          width: 9vw;
+          border-radius: 0.7vw;
+          border: solid 2px hsl(233, 67%, 56%);
+          font-size: 1.5vw;
+          margin-left: 1vw;
+        }
+        .today-small-div {
+          width: 57vw;
+          height: 20.5vw;
+          margin-top: 2vw;
+          margin-left: 6vw;
+          margin-right: 2vw;
+          background-size: 57vw;
+          flex-direction: row;
+          align-items: center;
+          background-image: url("./assets/images/bg-today-large.svg");
+        }
+        .city-time-div {
+          width: 80vw;
+          height: auto;
+          margin-left: 1.5vw;
+          margin-right: 0;
+        }
+        .city-label {
+          font-size: 1.7vw;
+        }
+        .time-label {
+          margin-top: 1vw;
+          font-size: 1.3vw;
+        }
+        .today-icon-temp-div {
+          width: 40vw;
+        }
+        .today-icon-temp-div img {
+          width: 12vw;
+          margin-left: 12vw;
+        }
+        .today-temp-label {
+          font-size: 5.5vw;
+        }
+        .today-other-col-div {
+          display: flex;
+          flex-direction: row;
+          margin-left: 6vw;
+          margin-top: 1vw;
+          width: 57vw;
+        }
+
+        .each-small-div {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          background-color: hsl(243, 23%, 24%);
+          width: 13vw;
+          height: 10vw;
+          border-radius: 1vw;
+          margin-bottom: 3vw;
+          margin-top: 1vw;
+          margin-right: 1.5vw;
+        }
+        .each-small-params-label {
+          color: hsl(0, 0%, 100%);
+          font-size: 1.2vw;
+          margin-left: 2vw;
+        }
+        .each-small-value-label {
+          color: hsl(0, 0%, 100%);
+          font-size: 1.5vw;
+          margin-left: 2vw;
+        }
+        .daily-forecast-main-div {
+          width: 57vw;
+          height: 18vw;
+          margin-left: 6vw;
+        }
+        .daily-forecast-label {
+          font-family: DMSans-SemiBold;
+          color: hsl(0, 0%, 100%);
+          font-size: 2vw;
+          margin-bottom: 1vw;
+        }
+
+        .daily-forecast-days-div-col,
+        .daily-forecast-days-div-row {
+          flex-direction: row;
+          gap: 1vw;
+        }
+
+        .daily-forecast-day,
+        .daily-forecast-last-day {
+          width: 7.2vw;
+          height: 13vw;
+          border-radius: 1vw;
+        }
+
+        .each-day-label {
+          font-size: 1.2vw;
+          margin-top: 1.5vw;
+        }
+        .each-day-img {
+          width: 5vw;
+          margin-top: 1vw;
+          margin-bottom: 1vw;
+        }
+
+        .each-day-max {
+          font-size: 1.2vw;
+          margin-right: 0.5vw;
+        }
+        .each-day-min {
+          font-size: 1.2vw;
+          margin-left: 0.5vw;
+        }
+        .hourly-forecast-main-div {
+          width: 28vw;
+          height: 52vw;
+          margin-left: 64vw;
+          margin-right: 1vw;
+          border-radius: 0.8vw;
+          margin-top: -55vw;
+        }
+        .hourly-forecast-title-select-div {
+          margin-top: 1.5vw;
+        }
+        .hourly-forecast-title {
+          font-size: 1.7vw;
+          margin-left: 2vw;
+          margin-top: 1vw;
+          margin-top: 1.5vw;
+        }
+        .hourly-forecast-select {
+          border-radius: 0.5vw;
+          width: 8vw;
+          height: 2.5vw;
+          margin-left: 4vw;
+          font-size: 1.2vw;
+          margin-top: 1vw;
+          margin-top: 1.5vw;
+        }
+        .hours-in-day-main-div {
+          width: 24vw;
+          height: 45vw;
+          overflow-y: scroll;
+          margin-left: 2vw;
+          margin-right: 1vw;
+          margin-top: 2vw;
+        }
+        .each-hour-in-day {
+          border-radius: 0.5vw;
+          width: 24vw;
+          height: 15vw;
+          margin-top: 1vw;
+        }
+        .each-hour-in-day img {
+          width: 3vw;
+          margin-left: 1vw;
+        }
+        .each-hour-in-day-time {
+          font-size: 1.5vw;
+        }
+        .each-hour-in-day-temp {
+          font-size: 1.5vw;
+          margin-left: 10vw;
+          margin-right: 2vw;
+        }
+        .attribution {
+          font-size: 1.2vw;
+          margin-top: 20vw;
+        }
+        .attribution a {
+          font-size: 1.2vw;
+        }
+      }
+      @media (min-width: 1024px) and (max-width: 1280px) {
+        .logo {
+          width: 13vw;
+          margin-left: 6vw;
+          margin-top: 2vw;
+          margin-bottom: 2vw;
+        }
+        .units-div {
+          width: 8vw;
+          border-radius: 0.4vw;
+          margin-right: 6vw;
+          margin-top: 2vw;
+          margin-bottom: 2vw;
+        }
+        .units-div .dropdown-arrow {
+          width: 0.9vw;
+        }
+        .units-div img {
+          width: 1.2vw;
+        }
+        .units-div label {
+          font-size: 1.2vw;
+        }
+        h1 {
+          font-size: 3.8vw;
+        }
+        .search-div {
+          flex-direction: row;
+        }
+        .search-input-div {
+          margin-left: 26vw;
+          margin-right: 0.1vw;
+          border-radius: 0.7vw;
+          height: 4vw;
+          width: 37vw;
+        }
+        .search-input-div input {
+          width: 40vw;
+          height: 4vw;
+          margin-left: 1.5vw;
+          margin-right: 1vw;
+          font-size: 1.5vw;
+        }
+        .search-input-div img {
+          width: 1.5vw;
+          margin-left: 1.5vw;
+        }
+        .search-div button {
+          height: 4vw;
+          width: 9vw;
+          border-radius: 0.7vw;
+          border: solid 2px hsl(233, 67%, 56%);
+          font-size: 1.5vw;
+          margin-left: 1vw;
+        }
+        .today-small-div {
+          width: 57vw;
+          height: 20.5vw;
+          margin-top: 2vw;
+          margin-left: 6vw;
+          margin-right: 2vw;
+          background-size: 57vw;
+          flex-direction: row;
+          align-items: center;
+          background-image: url("./assets/images/bg-today-large.svg");
+        }
+        .city-time-div {
+          width: 20vw;
+          height: auto;
+          margin-top: 0.1vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+        }
+        .city-label {
+          font-size: 1.8vw;
+          margin-left: 1.2vw;
+        }
+        .time-label {
+          margin-top: 1vw;
+          font-size: 1.3vw;
+        }
+        .today-icon-temp-div {
+          width: 40vw;
+        }
+        .today-icon-temp-div img {
+          width: 11vw;
+          margin-left: 5vw;
+        }
+        .today-temp-label {
+          font-size: 7vw;
+          margin-right: 9vw;
+        }
+        .today-other-col-div {
+          display: flex;
+          flex-direction: row;
+          margin-left: 6vw;
+          margin-top: 1vw;
+          width: 57vw;
+        }
+
+        .each-small-div {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          background-color: hsl(243, 23%, 24%);
+          width: 13vw;
+          height: 10vw;
+          border-radius: 1vw;
+          margin-bottom: 3vw;
+          margin-top: 1vw;
+          margin-right: 1.5vw;
+        }
+        .each-small-params-label {
+          color: hsl(0, 0%, 100%);
+          font-size: 1.2vw;
+          margin-left: 2vw;
+        }
+        .each-small-value-label {
+          color: hsl(0, 0%, 100%);
+          font-size: 1.5vw;
+          margin-left: 2vw;
+        }
+        .daily-forecast-main-div {
+          width: 57vw;
+          height: 20vw;
+          margin-left: 6vw;
+        }
+        .daily-forecast-label {
+          font-family: DMSans-SemiBold;
+          color: hsl(0, 0%, 100%);
+          font-size: 2vw;
+          margin-bottom: 1vw;
+        }
+
+        .daily-forecast-days-div-col,
+        .daily-forecast-days-div-row {
+          flex-direction: row;
+          gap: 1vw;
+        }
+
+        .daily-forecast-day,
+        .daily-forecast-last-day {
+          width: 7.2vw;
+          height: 13vw;
+          border-radius: 1vw;
+        }
+
+        .each-day-label {
+          font-size: 1.2vw;
+          margin-top: 1.5vw;
+        }
+        .each-day-img {
+          width: 5vw;
+          margin-top: 1vw;
+          margin-bottom: 1vw;
+        }
+
+        .each-day-max {
+          font-size: 1.2vw;
+          margin-right: 0.5vw;
+        }
+        .each-day-min {
+          font-size: 1.2vw;
+          margin-left: 0.5vw;
+        }
+        .hourly-forecast-main-div {
+          width: 28vw;
+          height: 52vw;
+          margin-left: 64vw;
+          margin-right: 1vw;
+          margin-top: -56.8vw;
+          border-radius: 0.8vw;
+        }
+        .hourly-forecast-title-select-div {
+          margin-top: 1.5vw;
+        }
+        .hourly-forecast-title {
+          font-size: 1.7vw;
+          margin-left: 2vw;
+          margin-top: 0.5vw;
+        }
+        .hourly-forecast-select {
+          border-radius: 0.5vw;
+          width: 7vw;
+          height: 2.5vw;
+          margin-left: 4vw;
+          font-size: 1.2vw;
+          margin-top: 0.5vw;
+        }
+        .hours-in-day-main-div {
+          width: 24vw;
+          height: 45vw;
+          overflow-y: scroll;
+          margin-left: 2vw;
+          margin-right: 1vw;
+          margin-top: 2vw;
+        }
+        .each-hour-in-day {
+          border-radius: 0.5vw;
+          width: 24vw;
+          height: 15vw;
+          margin-top: 1vw;
+        }
+        .each-hour-in-day img {
+          width: 3vw;
+          margin-left: 1vw;
+        }
+        .each-hour-in-day-time {
+          font-size: 1.5vw;
+        }
+        .each-hour-in-day-temp {
+          font-size: 1.5vw;
+          margin-left: 10vw;
+          margin-right: 2vw;
+        }
+        .attribution {
+          font-size: 1.2vw;
+          margin-top: 20vw;
+        }
+        .attribution a {
+          font-size: 1.2vw;
+        }
+      }
+
+      @media (min-width: 1280px) {
+        .logo {
+          width: 12vw;
+          margin-left: 6vw;
+          margin-top: 2vw;
+          margin-bottom: 2vw;
+        }
+        .units-div {
+          width: 8vw;
+          border-radius: 0.4vw;
+          margin-right: 6vw;
+          margin-top: 2vw;
+          margin-bottom: 2vw;
+        }
+        .units-div .dropdown-arrow {
+          width: 0.9vw;
+        }
+        .units-div img {
+          width: 1.2vw;
+        }
+        .units-div label {
+          font-size: 1.2vw;
+        }
+        h1 {
+          font-size: 3.7vw;
+        }
+        .search-div {
+          flex-direction: row;
+        }
+        .search-input-div {
+          margin-left: 26vw;
+          margin-right: 0.1vw;
+          border-radius: 0.7vw;
+          height: 3vw;
+          width: 37vw;
+        }
+        .search-input-div input {
+          width: 40vw;
+          height: 3vw;
+          margin-left: 1.5vw;
+          margin-right: 1vw;
+          font-size: 1.2vw;
+        }
+        .search-input-div img {
+          width: 1.5vw;
+          margin-left: 1.5vw;
+        }
+        .search-div button {
+          height: 3vw;
+          width: 9vw;
+          border-radius: 0.7vw;
+          border: solid 2px hsl(233, 67%, 56%);
+          font-size: 1.2vw;
+          margin-left: 1vw;
+        }
+        .today-small-div {
+          width: 57vw;
+          height: 20.5vw;
+          margin-top: 2vw;
+          margin-left: 6vw;
+          margin-right: 2vw;
+          background-size: 57vw;
+          flex-direction: row;
+          align-items: center;
+          background-image: url("./assets/images/bg-today-large.svg");
+        }
+        .city-time-div {
+          width: 20vw;
+          height: auto;
+          margin-top: 0.1vw;
+          margin-left: 0vw;
+          margin-right: 2vw;
+        }
+        .city-label {
+          font-size: 1.8vw;
+          margin-left: 2vw;
+        }
+        .time-label {
+          margin-top: 1vw;
+          font-size: 1.3vw;
+        }
+        .today-icon-temp-div {
+          width: 40vw;
+        }
+        .today-icon-temp-div img {
+          width: 11vw;
+          margin-left: 5vw;
+        }
+        .today-temp-label {
+          font-size: 7vw;
+          margin-right: 9vw;
+        }
+        .today-other-col-div {
+          display: flex;
+          flex-direction: row;
+          margin-left: 6vw;
+          margin-top: 1vw;
+          width: 57vw;
+        }
+
+        .each-small-div {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          background-color: hsl(243, 23%, 24%);
+          width: 13vw;
+          height: 10vw;
+          border-radius: 1vw;
+          margin-bottom: 3vw;
+          margin-top: 1vw;
+          margin-right: 1.5vw;
+        }
+        .each-small-params-label {
+          color: hsl(0, 0%, 100%);
+          font-size: 1.2vw;
+          margin-left: 2vw;
+        }
+        .each-small-value-label {
+          color: hsl(0, 0%, 100%);
+          font-size: 1.5vw;
+          margin-left: 2vw;
+        }
+        .daily-forecast-main-div {
+          width: 57vw;
+          height: 20vw;
+          margin-left: 6vw;
+        }
+        .daily-forecast-label {
+          font-family: DMSans-SemiBold;
+          color: hsl(0, 0%, 100%);
+          font-size: 2vw;
+          margin-bottom: 1vw;
+        }
+
+        .daily-forecast-days-div-col,
+        .daily-forecast-days-div-row {
+          flex-direction: row;
+          gap: 1vw;
+        }
+
+        .daily-forecast-day,
+        .daily-forecast-last-day {
+          width: 7.2vw;
+          height: 13vw;
+          border-radius: 1vw;
+        }
+
+        .each-day-label {
+          font-size: 1.2vw;
+          margin-top: 1.5vw;
+        }
+        .each-day-img {
+          width: 5vw;
+          margin-top: 1vw;
+          margin-bottom: 1vw;
+        }
+
+        .each-day-max {
+          font-size: 1.2vw;
+          margin-right: 0.5vw;
+        }
+        .each-day-min {
+          font-size: 1.2vw;
+          margin-left: 0.5vw;
+        }
+        .hourly-forecast-main-div {
+          width: 28vw;
+          height: 52vw;
+          margin-left: 64vw;
+          margin-right: 1vw;
+          border-radius: 0.8vw;
+          margin-top: -57vw;
+        }
+        .hourly-forecast-title-select-div {
+          margin-top: 1.5vw;
+        }
+        .hourly-forecast-title {
+          font-size: 1.7vw;
+          margin-left: 2vw;
+          margin-top: 1.2vw;
+        }
+        .hourly-forecast-select {
+          border-radius: 0.5vw;
+          width: 9vw;
+          height: 3vw;
+          margin-left: 3vw;
+          font-size: 1.1vw;
+          margin-top: 1.2vw;
+        }
+        .hours-in-day-main-div {
+          width: 24vw;
+          height: 45vw;
+          overflow-y: scroll;
+          margin-left: 2vw;
+          margin-right: 1vw;
+          margin-top: 2vw;
+        }
+        .each-hour-in-day {
+          border-radius: 0.5vw;
+          width: 24vw;
+          height: 15vw;
+          margin-top: 1vw;
+          justify-content: space-around;
+        }
+        .each-hour-in-day img {
+          width: 3vw;
+          margin-left: 1vw;
+        }
+        .each-hour-in-day-time {
+          font-size: 1.5vw;
+        }
+        .each-hour-in-day-temp {
+          font-size: 1.5vw;
+          margin-left: 10vw;
+          margin-right: 2vw;
+        }
+        .attribution {
+          font-size: 1.2vw;
+          margin-top: 20vw;
+        }
+        .attribution a {
+          font-size: 1.2vw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logo-search-container">
+      <img src="./assets/images/logo.svg" class="logo" />
+
+      <div class="units-div">
+        <img src="./assets/images/icon-units.svg" />
+
+        <label>Units</label>
+        <img class="dropdown-arrow" src="./assets/images/icon-dropdown.svg" />
+      </div>
+    </div>
+    <div class="how-sky-div">
+      <h1>How's the sky looking today?</h1>
+    </div>
+
+    <div class="search-div">
+      <div class="search-input-div">
+        <img src="./assets/images/icon-search.svg" />
+        <input
+          id="city"
+          type="text"
+          placeholder="Search for a place..."
+          autofocus
+        />
+      </div>
+      <button onclick="search()">Search</button>
+    </div>
+    <div class="today-small-div">
+      <div class="city-time-div">
+        <label id="city-name" class="city-label"></label>
+        <label id="current-time" class="time-label"></label>
+      </div>
+      <div class="today-icon-temp-div">
+        <img id="current-weather-icon" />
+        <label id="current-temp" class="today-temp-label"></label>
+      </div>
+    </div>
+    <div class="today-other-col-div">
+      <div class="today-other-row-div">
+        <div class="each-small-div">
+          <label class="each-small-params-label">Feels like</label>
+          <label id="feels-like" class="each-small-value-label"
+            ><span>°</span></label
+          >
+        </div>
+        <div class="each-small-div">
+          <label class="each-small-params-label">Humidity</label>
+          <label id="current-humid" class="each-small-value-label"></label>
+        </div>
+      </div>
+      <div class="today-other-row-div">
+        <div class="each-small-div">
+          <label class="each-small-params-label">Wind</label>
+          <label id="current-wind-speed" class="each-small-value-label"></label>
+        </div>
+        <div class="each-small-div">
+          <label class="each-small-params-label">Precipitation</label>
+          <label
+            id="current-precipitation"
+            class="each-small-value-label"
+          ></label>
+        </div>
+      </div>
+    </div>
+    <div id="daily-forecast-div" class="daily-forecast-main-div">
+      <label class="daily-forecast-label">Daily forecast</label>
+      <div class="daily-forecast-days-div-col">
+        <div
+          id="daily-forecast-days-div-row1"
+          class="daily-forecast-days-div-row"
+        ></div>
+        <div
+          id="daily-forecast-days-div-row2"
+          class="daily-forecast-days-div-row"
+        ></div>
+        <div
+          id="daily-forecast-days-div-row3"
+          class="daily-forecast-days-div-row"
+        ></div>
+      </div>
+    </div>
+    <div class="hourly-forecast-main-div">
+      <div class="hourly-forecast-title-select-div">
+        <label class="hourly-forecast-title">Hourly forecast</label>
+        <!-- Insert hourly forecast for the selected day here -->
+
+        <select
+          id="select-day"
+          class="hourly-forecast-select"
+          onchange="selectDay()"
+        >
+          <option value="Sunday">Sunday</option>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+        </select>
+      </div>
+      <div id="hours-in-day-main-div" class="hours-in-day-main-div"></div>
+    </div>
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+      Coded by <a href="#">Zhou Han Bao . Copyright @March-2026</a>.
+    </div>
+
+    <script>
+      let position_result,
+        forecast_result,
+        daily_forecast_result,
+        hourly_forecast_result;
+
+      let daily_time,
+        daily_max_temp,
+        daily_min_temp,
+        weather_code,
+        hourly_time,
+        hourly_temp,
+        hourly_weather_code;
+
+      const convertTZ = (date, timezone) => {
+        return new Date(date.toLocaleString("en-US", { timeZone: timezone }));
+      };
+      const customTimeStr = (time) => {
+        const days_arr = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        const months_arr = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+        let date = time.getDate();
+        let month = time.getMonth();
+        let year = time.getFullYear();
+        let day = time.getDay();
+        let hour = time.getHours();
+
+        return `${days_arr[day]}, ${months_arr[month]} ${date}, ${year}`;
+      };
+      const setWeatherIcon = (weather_code) => {
+        let srcImg;
+        switch (weather_code) {
+          case 0:
+            srcImg = "./assets/images/icon-sunny.webp";
+            break;
+          case 1:
+            srcImg = "./assets/images/icon-sunny.webp";
+            break;
+          case 2:
+            srcImg = "./assets/images/icon-partly-cloudy.webp";
+            break;
+          case 3:
+            srcImg = "./assets/images/icon-overcast.webp";
+            break;
+          case 45:
+            srcImg = "./assets/images/icon-fog.webp";
+            break;
+          case 48:
+            srcImg = "./assets/images/icon-fog.webp";
+            break;
+          case 51:
+            srcImg = "./assets/images/icon-drizzle.webp";
+            break;
+          case 53:
+            srcImg = "./assets/images/icon-drizzle.webp";
+            break;
+          case 55:
+            srcImg = "./assets/images/icon-drizzle.webp";
+            break;
+          case 61:
+            srcImg = "./assets/images/icon-rain.webp";
+            break;
+          case 63:
+            srcImg = "./assets/images/icon-rain.webp";
+            break;
+          case 65:
+            srcImg = "./assets/images/icon-rain.webp";
+            break;
+          case 66:
+            srcImg = "./assets/images/icon-rain.webp";
+            break;
+          case 67:
+            srcImg = "./assets/images/icon-rain.webp";
+            break;
+          case 71:
+            srcImg = "./assets/images/icon-snow.webp";
+            break;
+          case 73:
+            srcImg = "./assets/images/icon-snow.webp";
+            break;
+          case 75:
+            srcImg = "./assets/images/icon-snow.webp";
+            break;
+          case 77:
+            srcImg = "./assets/images/icon-snow.webp";
+            break;
+          case 80:
+            srcImg = "./assets/images/icon-rain.webp";
+            break;
+          case 81:
+            srcImg = "./assets/images/icon-rain.webp";
+            break;
+          case 82:
+            srcImg = "./assets/images/icon-rain.webp";
+            break;
+          case 85:
+            srcImg = "./assets/images/icon-snow.webp";
+            break;
+          case 86:
+            srcImg = "./assets/images/icon-snow.webp";
+            break;
+          case 95:
+            srcImg = "./assets/images/icon-storm.webp";
+            break;
+          case 96:
+            srcImg = "./assets/images/icon-storm.webp";
+            break;
+          case 99:
+            srcImg = "./assets/images/icon-storm.webp";
+            break;
+          default:
+            break;
+        }
+        return srcImg;
+      };
+      const selectDay = () => {
+        document.getElementById("hours-in-day-main-div").innerHTML = ""; //clear all element under this parent id, can do refresh when choose different day
+
+        let day_selected = document.getElementById("select-day").value;
+        let start_index = 0;
+        let end_index = 0;
+        let num_hours_in_day = 24;
+        let num_days_in_week = 7;
+        let day_in_num;
+        switch (day_selected) {
+          case "Sunday":
+            day_in_num = 0;
+            break;
+          case "Monday":
+            day_in_num = 1;
+            break;
+          case "Tuesday":
+            day_in_num = 2;
+            break;
+          case "Wednesday":
+            day_in_num = 3;
+            break;
+          case "Thursday":
+            day_in_num = 4;
+            break;
+          case "Friday":
+            day_in_num = 5;
+            break;
+          case "Saturday":
+            day_in_num = 6;
+            break;
+          default:
+            break;
+        }
+        for (let j = start_index; j < num_days_in_week; j++) {
+          let day_num = new Date(hourly_time[j * 24]).getDay();
+
+          if (day_in_num === day_num) {
+            for (let k = j * 24; k < j * 24 + 24; k++) {
+              let each_hour_forecast = document.createElement("div");
+              each_hour_forecast.classList.add("each-hour-in-day");
+              let each_hour_weather_icon = document.createElement("img");
+              each_hour_weather_icon.classList.add("each-hour-in-day-img");
+              let each_hour_hour = document.createElement("label");
+              each_hour_hour.classList.add("each-hour-in-day-time");
+              let each_hour_temp = document.createElement("label");
+              each_hour_temp.classList.add("each-hour-in-day-temp");
+              each_hour_weather_icon.setAttribute(
+                "src",
+                setWeatherIcon(hourly_weather_code[k])
+              );
+              let ampm = "";
+              let hour12 = new Date(hourly_time[k]).getHours();
+              if (hour12 < 13) {
+                ampm = "AM";
+              } else {
+                hour12 -= 12;
+                ampm = "PM";
+              }
+              each_hour_hour.innerText = `${hour12} ${ampm}`;
+              each_hour_temp.innerText = "";
+              each_hour_temp.innerText = `${hourly_temp[k]}°`;
+              each_hour_forecast.appendChild(each_hour_weather_icon);
+              each_hour_forecast.appendChild(each_hour_hour);
+              each_hour_forecast.appendChild(each_hour_temp);
+
+              document
+                .getElementById("hours-in-day-main-div")
+                .appendChild(each_hour_forecast);
+            }
+            return;
+          }
+        }
+      };
+
+      const sendRequest = async (url) => {
+        try {
+          let response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+          }
+          return await response.json(); //get latitude & longitude
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      const createDailyWeatherElements = (parentId, item, index, divclass) => {
+        //small div elements in Daily forecast
+        const daily_time_div = document.createElement("div");
+        daily_time_div.setAttribute("id", `daily-forecast-day-${index}`);
+        daily_time_div.classList.add(divclass);
+
+        const daily_day_label = document.createElement("label");
+        daily_day_label.classList.add("each-day-label");
+        let day = customTimeStr(new Date(item)).split(",");
+        daily_day_label.innerText = day[0].substring(0, 3);
+
+        const each_day_max_min_div = document.createElement("div");
+        each_day_max_min_div.classList.add("each-day-max-min");
+
+        const day_max_temp = document.createElement("label");
+        const day_min_temp = document.createElement("label");
+        day_max_temp.classList.add("each-day-max");
+        day_min_temp.classList.add("each-day-min");
+        day_max_temp.innerText = `${daily_max_temp[index]}°`;
+        day_min_temp.innerText = `${daily_min_temp[index]}°`;
+
+        const weather_icon = document.createElement("img");
+        weather_icon.setAttribute("src", setWeatherIcon(weather_code[index]));
+        weather_icon.classList.add("each-day-img");
+
+        daily_time_div.appendChild(daily_day_label);
+        daily_time_div.appendChild(weather_icon);
+        each_day_max_min_div.appendChild(day_max_temp);
+        each_day_max_min_div.appendChild(day_min_temp);
+        daily_time_div.appendChild(each_day_max_min_div);
+        parentId.appendChild(daily_time_div);
+      };
+      //Request to API Open-Meteo.com
+      //---------------------------------------------------------------------------------------------------------------------
+      const callAPIReq = async (city) => {
+        //get latitude & longitude for city
+        position_result = await sendRequest(
+          `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`
+        );
+
+        //current forecast API based on latitude & longitude above, timezone auto
+        forecast_result = await sendRequest(
+          `https://api.open-meteo.com/v1/forecast?latitude=${position_result.results[0].latitude}&longitude=${position_result.results[0].longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,precipitation,is_day,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_direction_10m,wind_gusts_10m`
+        );
+
+        //daily forecast API based on latitude & longitude above, timezone auto
+        daily_forecast_result = await sendRequest(
+          `https://api.open-meteo.com/v1/forecast?latitude=${position_result.results[0].latitude}&longitude=${position_result.results[0].longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min`
+        ); //forecast result
+
+        //hourly forecast API based on latitude & longitude above, timezone auto
+        hourly_forecast_result = await sendRequest(
+          `https://api.open-meteo.com/v1/forecast?latitude=${position_result.results[0].latitude}&longitude=${position_result.results[0].longitude}&hourly=temperature_2m,weather_code`
+        ); //forecast result
+      };
+      const search = async () => {
+        try {
+          await callAPIReq(document.getElementById("city").value);
+          //fill-in responses from current weather forecast API into DOM element
+          //---------------------------------------------------------------------------------------------------------------------------------
+          document.getElementById(
+            "city-name"
+          ).innerText = `${position_result.results[0].name},${position_result.results[0].country} `;
+          document.getElementById(
+            "current-temp"
+          ).innerText = `${forecast_result.current.temperature_2m}°`;
+          document.getElementById(
+            "current-humid"
+          ).innerText = `${forecast_result.current.relative_humidity_2m} ${forecast_result.current_units.relative_humidity_2m}`;
+          document.getElementById("current-time").innerText = customTimeStr(
+            new Date(forecast_result.current.time)
+          );
+          document.getElementById(
+            "feels-like"
+          ).innerText = `${forecast_result.current.apparent_temperature} ${forecast_result.current_units.apparent_temperature}`;
+          document.getElementById(
+            "current-wind-speed"
+          ).innerText = `${forecast_result.current.wind_speed_10m} ${forecast_result.current_units.wind_speed_10m}`;
+          document.getElementById(
+            "current-precipitation"
+          ).innerText = `${forecast_result.current.precipitation} ${forecast_result.current_units.precipitation}`;
+
+          document.getElementById("current-weather-icon").src = setWeatherIcon(
+            forecast_result.current.weather_code
+          );
+          //put results from above API request into arrays
+          //-------------------------------------------------------------------------------------------------------------------------------
+          daily_time = [...daily_forecast_result.daily.time];
+          daily_max_temp = [...daily_forecast_result.daily.temperature_2m_max];
+          daily_min_temp = [...daily_forecast_result.daily.temperature_2m_min];
+          weather_code = [...daily_forecast_result.daily.weather_code];
+
+          hourly_time = [...hourly_forecast_result.hourly.time];
+          hourly_temp = [...hourly_forecast_result.hourly.temperature_2m];
+          hourly_weather_code = [...hourly_forecast_result.hourly.weather_code];
+          //---------------------------------------------------------------------------------------------------------------------------------
+          //fill-in responses from daily weather forecast API into DOM element
+          //---------------------------------------------------------------------------------------------------------------------------------
+
+          let daily_forecast_div_row1 = document.getElementById(
+            "daily-forecast-days-div-row1"
+          );
+          let daily_forecast_div_row2 = document.getElementById(
+            "daily-forecast-days-div-row2"
+          );
+          let daily_forecast_div_row3 = document.getElementById(
+            "daily-forecast-days-div-row3"
+          );
+
+          for (let j = 0; j < 3; j++) {
+            createDailyWeatherElements(
+              daily_forecast_div_row1,
+              daily_time[j],
+              j,
+              "daily-forecast-day"
+            );
+          }
+
+          for (let j = 3; j < 6; j++) {
+            createDailyWeatherElements(
+              daily_forecast_div_row2,
+              daily_time[j],
+              j,
+              "daily-forecast-day"
+            );
+          }
+          for (let j = 6; j < 7; j++) {
+            createDailyWeatherElements(
+              daily_forecast_div_row3,
+              daily_time[j],
+              j,
+              "daily-forecast-last-day"
+            );
+          }
+        } catch (error) {
+          console.error(error.message);
+        }
+      };
+    </script>
+  </body>
+</html>
