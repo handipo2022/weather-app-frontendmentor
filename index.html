@@ -225,6 +225,7 @@
       .hourly-forecast-title-select-div {
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
         align-items: center;
       }
       .hourly-forecast-title {
@@ -232,14 +233,22 @@
         color: hsl(0, 0%, 100%);
       }
       .hourly-forecast-select {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        height: auto;
         background-color: hsl(243, 23%, 30%);
-        font-family: DMSans-SemiBold;
-        color: hsl(0, 0%, 100%);
-        text-align: center;
-        border: solid 1px hsl(243, 23%, 30%);
-        border-radius: 5vw;
+        position: relative;
+      }
+      .hourly-forecast-select .dropdown-arrow {
+        height: auto;
       }
 
+      .hourly-forecast-select label {
+        font-family: DMSans-Medium;
+        color: hsl(0, 0%, 100%);
+      }
       .hours-in-day-main-div {
         display: flex;
         flex-direction: column;
@@ -292,6 +301,70 @@
       .active-unit {
         background-color: hsl(243, 23%, 30%);
       }
+
+      .drop-down-menu-days {
+        display: none;
+        position: absolute;
+        z-index: 1;
+        background-color: hsl(243, 27%, 20%);
+        width: 38vw;
+        margin-top: 90vw;
+        margin-right: 7vw;
+        border-radius: 2vw;
+      }
+      .drop-down-days-div-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        margin-left: 2vw;
+      }
+      .drop-down-days-div-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-family: DMSans-Medium;
+        color: hsl(0, 0%, 100%);
+        cursor: pointer;
+        margin-bottom: 1.5vw;
+        margin-top: 1.5vw;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+        height: 8vw;
+        width: 35vw;
+        border-radius: 2vw;
+        cursor: pointer;
+      }
+      .drop-down-days-div-row:hover {
+        background-color: hsl(243, 23%, 30%);
+      }
+      .drop-down-days-div-row:active {
+        background-color: hsl(243, 23%, 30%);
+      }
+
+      .drop-down-search-word-div {
+        display: none;
+        position: absolute;
+        z-index: 1;
+        background-color: hsl(243, 23%, 24%);
+      }
+      .drop-down-search-word-div-inside {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+      }
+
+      .city-name-row-div {
+        color: hsl(0, 0%, 100%);
+        font-family: DMSans-Light;
+      }
+      .city-name-row-div:hover {
+        background-color: hsl(243, 23%, 30%);
+      }
+      .city-name-row-div:active {
+        background-color: hsl(243, 23%, 30%);
+      }
+
       .attribution {
         width: 100%;
         height: auto;
@@ -491,19 +564,20 @@
           border-radius: 3vw;
         }
         .hourly-forecast-title-select-div {
-          margin-top: 4vw;
+          margin-top: 1vw;
         }
         .hourly-forecast-title {
           font-size: 5vw;
-          margin-left: 4vw;
-          margin-top: 1.5vw;
+          margin-left: 2vw;
+          margin-top: 1vw;
         }
         .hourly-forecast-select {
-          border-radius: 2vw;
+          border-radius: 1.5vw;
           width: 30vw;
           height: 8vw;
-          margin-left: 8vw;
-          font-size: 4vw;
+          margin-left: 6vw;
+          margin-right: 2vw;
+          font-size: 4.5vw;
           margin-top: 1.5vw;
         }
         .hours-in-day-main-div {
@@ -566,7 +640,59 @@
           width: 33vw;
           height: 0.5vw;
         }
+        .drop-down-menu-days {
+          width: 38vw;
+          margin-top: 90vw;
+          margin-right: 7vw;
+          border-radius: 2vw;
+        }
+        .drop-down-days-div-col {
+          margin-left: 2vw;
+        }
+        .drop-down-days-div-row {
+          margin-bottom: 1.5vw;
+          margin-top: 1.5vw;
+          padding-top: 1vw;
+          padding-bottom: 1vw;
+          height: 8vw;
+          width: 32vw;
+          border-radius: 1.2vw;
+          margin-left: 2vw;
+          margin-right: 4vw;
+        }
 
+        .drop-down-days-div-row label {
+          margin-left: 2vw;
+        }
+        .drop-down-search-word-div {
+          width: 90vw;
+          height: 40vw;
+          margin-top: 57vw;
+          border-radius: 2vw;
+          padding-top:2vw;
+          padding-bottom:2vw;
+          padding-left:2vw;
+        }
+        .drop-down-search-word-div-inside {
+          margin-left: 2vw;
+          width: 88vw;
+          height: 40vw;
+          
+        }
+
+        .city-name-row-div {
+          color: hsl(0, 0%, 100%);
+          font-size: 4vw;
+          margin-top: 0.2vw;
+          margin-bottom: 0.2vw;
+          width:80vw;
+          height: auto;
+          padding-top: 0.5vw;
+          padding-bottom: 0.5vw;
+          padding-left:1.5vw;
+          margin-left: 1vw;
+          border-radius: 1vw;
+        }
         .attribution {
           font-size: 3vw;
           margin-top: 150vw;
@@ -768,11 +894,12 @@
         }
         .hourly-forecast-select {
           border-radius: 2vw;
-          width: 30vw;
+          width: 28vw;
           height: 8vw;
           margin-left: 8vw;
           font-size: 4vw;
           margin-top: 1.5vw;
+          margin-right: 2vw;
         }
         .hours-in-day-main-div {
           margin-left: 2vw;
@@ -835,6 +962,30 @@
           height: 0.5vw;
         }
 
+        .drop-down-menu-days {
+          width: 37vw;
+          margin-top: 90vw;
+          margin-right: 12vw;
+          border-radius: 2vw;
+        }
+        .drop-down-days-div-col {
+          margin-left: 2vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row {
+          margin-bottom: 1.5vw;
+          margin-top: 1.5vw;
+          padding-top: 1vw;
+          padding-bottom: 1vw;
+          height: 8vw;
+          width: 32vw;
+          border-radius: 1vw;
+          margin-left: 2vw;
+          margin-right: 4vw;
+        }
+        .drop-down-days-div-row label {
+          margin-left: 2vw;
+        }
         .attribution {
           font-size: 2.8vw;
           margin-top: 150vw;
@@ -972,7 +1123,7 @@
         .daily-forecast-label {
           font-family: DMSans-SemiBold;
           color: hsl(0, 0%, 100%);
-          font-size: 5vw;
+          font-size: 4vw;
           margin-left: 2vw;
         }
 
@@ -1029,16 +1180,17 @@
           margin-top: 4vw;
         }
         .hourly-forecast-title {
-          font-size: 5vw;
+          font-size: 4vw;
           margin-left: 4vw;
           margin-top: 1.5vw;
         }
         .hourly-forecast-select {
           border-radius: 2vw;
-          width: 30vw;
+          width: 28vw;
           height: 8vw;
           margin-left: 8vw;
-          font-size: 4vw;
+          margin-right: 2vw;
+          font-size: 3.2vw;
           margin-top: 1.5vw;
         }
         .hours-in-day-main-div {
@@ -1099,6 +1251,30 @@
         .div-hr {
           width: 35vw;
           height: 0.3vw;
+        }
+        .drop-down-menu-days {
+          width: 37vw;
+          margin-top: 90vw;
+          margin-right: 12vw;
+          border-radius: 2vw;
+        }
+        .drop-down-days-div-col {
+          margin-left: 2vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row {
+          margin-bottom: 1.5vw;
+          margin-top: 1.5vw;
+          padding-top: 1vw;
+          padding-bottom: 1vw;
+          height: 8vw;
+          width: 32vw;
+          border-radius: 1vw;
+          margin-left: 2vw;
+          margin-right: 4vw;
+        }
+        .drop-down-days-div-row label {
+          margin-left: 2vw;
         }
 
         .attribution {
@@ -1238,7 +1414,7 @@
         .daily-forecast-label {
           font-family: DMSans-SemiBold;
           color: hsl(0, 0%, 100%);
-          font-size: 5vw;
+          font-size: 4vw;
           margin-left: 5vw;
         }
 
@@ -1295,17 +1471,18 @@
           margin-top: 4vw;
         }
         .hourly-forecast-title {
-          font-size: 5vw;
+          font-size: 4vw;
           margin-left: 4vw;
           margin-top: 1.5vw;
         }
         .hourly-forecast-select {
           border-radius: 2vw;
-          width: 30vw;
+          width: 26vw;
           height: 8vw;
           margin-left: 8vw;
-          font-size: 4vw;
+          font-size: 3vw;
           margin-top: 1.5vw;
+          margin-right: 2vw;
         }
         .hours-in-day-main-div {
           margin-left: 2vw;
@@ -1365,6 +1542,30 @@
         .div-hr {
           width: 35vw;
           height: 0.3vw;
+        }
+        .drop-down-menu-days {
+          width: 37vw;
+          margin-top: 90vw;
+          margin-right: 12vw;
+          border-radius: 2vw;
+        }
+        .drop-down-days-div-col {
+          margin-left: 2vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row {
+          margin-bottom: 1.5vw;
+          margin-top: 1.5vw;
+          padding-top: 1vw;
+          padding-bottom: 1vw;
+          height: 8vw;
+          width: 32vw;
+          border-radius: 1vw;
+          margin-left: 2vw;
+          margin-right: 4vw;
+        }
+        .drop-down-days-div-row label {
+          margin-left: 2vw;
         }
 
         .attribution {
@@ -1563,12 +1764,15 @@
         }
         .hourly-forecast-select {
           border-radius: 0.5vw;
-          width: 8vw;
+          width: 7vw;
           height: 2.5vw;
           margin-left: 4vw;
           font-size: 1.2vw;
           margin-top: 1vw;
-          margin-top: 1.5vw;
+          margin-right: 2vw;
+        }
+        .hourly-forecast-select .dropdown-arrow {
+          width: 0.8vw;
         }
         .hours-in-day-main-div {
           width: 24vw;
@@ -1630,6 +1834,32 @@
         .div-hr {
           width: 12vw;
           height: 0.3vw;
+        }
+
+        .drop-down-menu-days {
+          width: 16vw;
+          margin-top: 28vw;
+          margin-right: 10vw;
+          border-radius: 0.5vw;
+        }
+        .drop-down-days-div-col {
+          margin-left: 2vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row {
+          margin-bottom: 0.3vw;
+          margin-top: 0.3vw;
+          padding-top: 0.1vw;
+          padding-bottom: 0.1vw;
+          height: 2.7vw;
+          width: 14vw;
+          border-radius: 0.3vw;
+          margin-left: 2vw;
+          margin-right: 4vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row label {
+          margin-left: 1vw;
         }
         .attribution {
           font-size: 1.2vw;
@@ -1769,7 +1999,7 @@
         .daily-forecast-label {
           font-family: DMSans-SemiBold;
           color: hsl(0, 0%, 100%);
-          font-size: 2vw;
+          font-size: 1.4vw;
           margin-bottom: 1vw;
         }
 
@@ -1816,17 +2046,21 @@
           margin-top: 1.5vw;
         }
         .hourly-forecast-title {
-          font-size: 1.7vw;
+          font-size: 1.4vw;
           margin-left: 2vw;
           margin-top: 0.5vw;
         }
         .hourly-forecast-select {
           border-radius: 0.5vw;
-          width: 7vw;
+          width: 6.7vw;
           height: 2.5vw;
           margin-left: 4vw;
-          font-size: 1.2vw;
+          font-size: 1vw;
           margin-top: 0.5vw;
+          margin-right: 1vw;
+        }
+        .hourly-forecast-select .dropdown-arrow {
+          width: 0.9vw;
         }
         .hours-in-day-main-div {
           width: 24vw;
@@ -1887,6 +2121,31 @@
         .div-hr {
           width: 12vw;
           height: 0.1vw;
+        }
+        .drop-down-menu-days {
+          width: 16vw;
+          margin-top: 26.8vw;
+          margin-right: 10vw;
+          border-radius: 0.5vw;
+        }
+        .drop-down-days-div-col {
+          margin-left: 2vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row {
+          margin-bottom: 0.3vw;
+          margin-top: 0.3vw;
+          padding-top: 0.1vw;
+          padding-bottom: 0.1vw;
+          height: 2.7vw;
+          width: 14vw;
+          border-radius: 0.3vw;
+          margin-left: 2vw;
+          margin-right: 4vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row label {
+          margin-left: 1vw;
         }
 
         .attribution {
@@ -2081,9 +2340,10 @@
         }
         .hourly-forecast-select {
           border-radius: 0.5vw;
-          width: 9vw;
+          width: 8vw;
           height: 3vw;
-          margin-left: 3vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
           font-size: 1.1vw;
           margin-top: 1.2vw;
         }
@@ -2149,6 +2409,32 @@
           width: 12vw;
           height: 0.1vw;
         }
+        .drop-down-menu-days {
+          width: 16vw;
+          margin-top: 26.8vw;
+          margin-right: 8vw;
+          border-radius: 0.5vw;
+        }
+        .drop-down-days-div-col {
+          margin-left: 2vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row {
+          margin-bottom: 0.3vw;
+          margin-top: 0.3vw;
+          padding-top: 0.1vw;
+          padding-bottom: 0.1vw;
+          height: 2.7vw;
+          width: 14vw;
+          border-radius: 0.3vw;
+          margin-left: 2vw;
+          margin-right: 4vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row label {
+          margin-left: 1vw;
+        }
+
         .attribution {
           font-size: 1.2vw;
           margin-top: 20vw;
@@ -2236,7 +2522,14 @@
           type="text"
           placeholder="Search for a place..."
           autofocus
+          onclick="showTypedSearchWord()"
         />
+        <div id="drop-down-search-word-div" class="drop-down-search-word-div">
+          <div
+            id="drop-down-search-word-div-inside"
+            class="drop-down-search-word-div-inside"
+          ></div>
+        </div>
       </div>
       <button onclick="search()">Search</button>
     </div>
@@ -2295,21 +2588,69 @@
     <div class="hourly-forecast-main-div">
       <div class="hourly-forecast-title-select-div">
         <label class="hourly-forecast-title">Hourly forecast</label>
-        <!-- Insert hourly forecast for the selected day here -->
 
-        <select
-          id="select-day"
-          class="hourly-forecast-select"
-          onchange="selectDay()"
-        >
-          <option value="Sunday">Sunday</option>
-          <option value="Monday">Monday</option>
-          <option value="Tuesday">Tuesday</option>
-          <option value="Wednesday">Wednesday</option>
-          <option value="Thursday">Thursday</option>
-          <option value="Friday">Friday</option>
-          <option value="Saturday">Saturday</option>
-        </select>
+        <div class="hourly-forecast-select">
+          <label id="day_label_in_hourly_forecast_select">Day</label>
+          <img
+            onclick="showDropDownDays()"
+            class="dropdown-arrow"
+            style="cursor: pointer"
+            src="./assets/images/icon-dropdown.svg"
+          />
+          <div id="drop-down-menu-days" class="drop-down-menu-days">
+            <div class="drop-down-days-div-col">
+              <div
+                onclick="selectDay(event)"
+                id="Sunday"
+                class="drop-down-days-div-row"
+              >
+                Sunday
+              </div>
+              <div
+                onclick="selectDay(event)"
+                id="Monday"
+                class="drop-down-days-div-row"
+              >
+                Monday
+              </div>
+              <div
+                onclick="selectDay(event)"
+                id="Tuesday"
+                class="drop-down-days-div-row"
+              >
+                Tuesday
+              </div>
+              <div
+                onclick="selectDay(event)"
+                id="Wednesday"
+                class="drop-down-days-div-row"
+              >
+                Wednesday
+              </div>
+              <div
+                onclick="selectDay(event)"
+                id="Thursday"
+                class="drop-down-days-div-row"
+              >
+                Thursday
+              </div>
+              <div
+                onclick="selectDay(event)"
+                id="Friday"
+                class="drop-down-days-div-row"
+              >
+                Friday
+              </div>
+              <div
+                onclick="selectDay(event)"
+                id="Saturday"
+                class="drop-down-days-div-row"
+              >
+                Saturday
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div id="hours-in-day-main-div" class="hours-in-day-main-div"></div>
     </div>
@@ -2334,36 +2675,44 @@
         hourly_temp,
         hourly_weather_code;
 
+      const days_arr = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      const months_arr = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+
       const onLoad = () => {
         localStorage.setItem("unit", "metric");
+      //  localStorage.removeItem("typedSearchWord");
+        let savedSearchWord = localStorage.getItem("typedSearchWord");
+        if (savedSearchWord === null) {
+          localStorage.setItem("typedSearchWord", "");
+          return;
+        } else return;
+         
       };
       const convertTZ = (date, timezone) => {
         return new Date(date.toLocaleString("en-US", { timeZone: timezone }));
       };
       const customTimeStr = (time) => {
-        const days_arr = [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ];
-        const months_arr = [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ];
         let date = time.getDate();
         let month = time.getMonth();
         let year = time.getFullYear();
@@ -2458,10 +2807,12 @@
         }
         return srcImg;
       };
-      const selectDay = () => {
+      const selectDay = (event) => {
+        let day_selected = event.target.id;
         document.getElementById("hours-in-day-main-div").innerHTML = ""; //clear all element under this parent id, can do refresh when choose different day
-
-        let day_selected = document.getElementById("select-day").value;
+        document.getElementById(
+          "day_label_in_hourly_forecast_select"
+        ).innerText = day_selected;
         let start_index = 0;
         let end_index = 0;
         let num_hours_in_day = 24;
@@ -2528,6 +2879,8 @@
                 .getElementById("hours-in-day-main-div")
                 .appendChild(each_hour_forecast);
             }
+            document.getElementById("drop-down-menu-days").style.display =
+              "none";
             return;
           }
         }
@@ -2596,6 +2949,7 @@
           );
         }
 
+        console.log(forecast_result);
         //daily forecast API based on latitude & longitude above, timezone auto
         if (localStorage.getItem("unit") === "metric") {
           daily_forecast_result = await sendRequest(
@@ -2607,6 +2961,7 @@
           ); //forecast result
         }
 
+        console.log(daily_forecast_result);
         //hourly forecast API based on latitude & longitude above, timezone auto
         if (localStorage.getItem("unit") === "metric") {
           hourly_forecast_result = await sendRequest(
@@ -2617,8 +2972,21 @@
             `https://api.open-meteo.com/v1/forecast?latitude=${position_result.results[0].latitude}&longitude=${position_result.results[0].longitude}&hourly=temperature_2m,weather_code&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch`
           ); //forecast result
         }
+        console.log(hourly_forecast_result);
       };
+
       const search = async () => {
+        if (document.getElementById("city").value != "") {
+          let searchWord = localStorage.getItem("typedSearchWord");
+          searchWord = searchWord + "," + document.getElementById("city").value;
+          localStorage.setItem("typedSearchWord", searchWord);
+          let arr_sw= localStorage.getItem("typedSearchWord").split(",");
+          if(arr_sw.length>5){
+            localStorage.removeItem("typedSearchWord");
+            localStorage.setItem("typedSearchWord", document.getElementById("city").value || "");
+          }
+        } else return;
+
         try {
           await callAPIReq(document.getElementById("city").value);
           //fill-in responses from current weather forecast API into DOM element
@@ -2705,8 +3073,104 @@
         } catch (error) {
           console.error(error.message);
         }
+
+        //hourly forecast for current day
+        let start_index = 0;
+        let end_index = 0;
+        let num_hours_in_day = 24;
+        let num_days_in_week = 7;
+        let day_in_num;
+
+        day_in_num = new Date(Date.now()).getDay();
+
+        document.getElementById(
+          "day_label_in_hourly_forecast_select"
+        ).innerText = days_arr[day_in_num];
+
+        for (let j = start_index; j < num_days_in_week; j++) {
+          let day_num = new Date(hourly_time[j * 24]).getDay();
+
+          if (day_in_num === day_num) {
+            for (let k = j * 24; k < j * 24 + 24; k++) {
+              let each_hour_forecast = document.createElement("div");
+              each_hour_forecast.classList.add("each-hour-in-day");
+              let each_hour_weather_icon = document.createElement("img");
+              each_hour_weather_icon.classList.add("each-hour-in-day-img");
+              let each_hour_hour = document.createElement("label");
+              each_hour_hour.classList.add("each-hour-in-day-time");
+              let each_hour_temp = document.createElement("label");
+              each_hour_temp.classList.add("each-hour-in-day-temp");
+              each_hour_weather_icon.setAttribute(
+                "src",
+                setWeatherIcon(hourly_weather_code[k])
+              );
+              let ampm = "";
+              let hour12 = new Date(hourly_time[k]).getHours();
+              if (hour12 < 13) {
+                ampm = "AM";
+              } else {
+                hour12 -= 12;
+                ampm = "PM";
+              }
+              each_hour_hour.innerText = `${hour12} ${ampm}`;
+              each_hour_temp.innerText = "";
+              each_hour_temp.innerText = `${hourly_temp[k]}°`;
+              each_hour_forecast.appendChild(each_hour_weather_icon);
+              each_hour_forecast.appendChild(each_hour_hour);
+              each_hour_forecast.appendChild(each_hour_temp);
+
+              document
+                .getElementById("hours-in-day-main-div")
+                .appendChild(each_hour_forecast);
+            }
+            document.getElementById("drop-down-menu-days").style.display =
+              "none";
+            return;
+          }
+        }
       };
 
+      //choose typed search word
+
+      const showTypedSearchWord = () => {
+        let ddsearchword = document.getElementById("drop-down-search-word-div");
+        let ddsearchword_inside = document.getElementById(
+          "drop-down-search-word-div-inside"
+        );
+        ddsearchword_inside.innerHTML = "";
+        let tempLS = localStorage.getItem("typedSearchWord");
+        let listCitiesName = tempLS.split(",");
+        for (let j = 0; j < listCitiesName.length; j++) {
+          let city_row_div = document.createElement("div");
+          city_row_div.innerText = listCitiesName[j];
+          city_row_div.classList.add("city-name-row-div");
+          city_row_div.setAttribute("id",`city${j}`)
+          city_row_div.addEventListener('click',function selectCity(event){
+            let idElement = event.target.id;
+            let choosedCity = document.getElementById(`${idElement}`).innerHTML;
+            document.getElementById("city").innerText = choosedCity;
+
+          })
+          ddsearchword_inside.appendChild(city_row_div);
+        }
+        ddsearchword.appendChild(ddsearchword_inside);
+        if (ddsearchword.style.display === "none") {
+          ddsearchword.style.display = "block";
+        } else {
+          ddsearchword.style.display = "none";
+        }
+      };
+      //choose days
+      const showDropDownDays = () => {
+        let dddays = document.getElementById("drop-down-menu-days");
+        if (dddays.style.display === "none") {
+          dddays.style.display = "block";
+        } else {
+          dddays.style.display = "none";
+        }
+      };
+
+      //choose unit
       const showDropDownUnit = () => {
         let ddmenu = document.getElementById("drop-down-menu-div");
 
@@ -2789,6 +3253,7 @@
           document.getElementById("mm").lastElementChild.style.visibility =
             "hidden";
 
+          document.getElementById("drop-down-menu-div").style.display = "none";
           return;
         } else if (localStorage.getItem("unit") === "imperial") {
           localStorage.setItem("unit", "metric");
@@ -2813,7 +3278,7 @@
             "visible";
           document.getElementById("mm").lastElementChild.style.visibility =
             "visible";
-
+          document.getElementById("drop-down-menu-div").style.display = "none";
           return;
         }
       };
