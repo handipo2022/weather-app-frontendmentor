@@ -60,6 +60,10 @@
         align-items: center;
         height: auto;
         background-color: hsl(243, 23%, 24%);
+        position: relative;
+      }
+      .units-div:hover {
+        cursor: pointer;
       }
       .units-div .dropdown-arrow {
         height: auto;
@@ -95,11 +99,15 @@
         justify-content: space-between;
         align-items: center;
       }
+
       .search-input-div input {
         background-color: hsl(243, 23%, 24%);
         font-family: DMSans-SemiBold;
         border: solid 1px hsl(243, 23%, 24%);
         color: hsl(0, 0%, 100%);
+      }
+      .search-input-div input:hover {
+        cursor: pointer;
       }
       ::placeholder {
         color: hsl(240, 6%, 70%);
@@ -115,11 +123,46 @@
         background-color: hsl(233, 67%, 56%);
         color: hsl(0, 0%, 100%);
         font-family: DMSans-SemiBold;
+        cursor: pointer;
+      }
+      .search-div button:hover {
+        background-color: hsl(248, 70%, 36%);
+        border: solid 1px hsl(248, 70%, 36%);
+      }
+      .no-search-result {
+        display: none;
+        position: relative;
+        text-align: center;
+        color: hsl(0, 0%, 100%);
+        font-family: DMSans-SemiBold;
+        z-index: 1;
+      }
+      .loading-state {
+        display: none;
+        flex-direction: column;
+        z-index: 3;
+        align-items: center;
+        justify-content: center;
+        background-color: hsl(243, 23%, 30%);
+      }
+      .loading-label {
+        z-index: 4;
+        color: hsl(0, 0%, 100%);
+        font-family: DMSans-Light;
+        background-color: hsl(243, 23%, 30%);
       }
       .today-small-div {
         display: flex;
         flex-direction: column;
         background-repeat: no-repeat;
+        align-items: center;
+        background-image: url("./assets/images/bg-today-small.svg");
+      }
+      .today-small-div-loading-state {
+        display: flex;
+        flex-direction: column;
+        background-image: url("");
+        background-color: hsl(243, 23%, 30%);
         align-items: center;
       }
 
@@ -224,6 +267,7 @@
       .hourly-forecast-title-select-div {
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
         align-items: center;
       }
       .hourly-forecast-title {
@@ -231,21 +275,44 @@
         color: hsl(0, 0%, 100%);
       }
       .hourly-forecast-select {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        height: auto;
         background-color: hsl(243, 23%, 30%);
-        font-family: DMSans-SemiBold;
+        position: relative;
+      }
+      .hourly-forecast-select .dropdown-arrow {
+        height: auto;
+      }
+      .hourly-forecast-select .dropdown-arrow:hover {
+        cursor: pointer;
+      }
+
+      .hourly-forecast-select label {
+        font-family: DMSans-Medium;
         color: hsl(0, 0%, 100%);
-        text-align: center;
-        border: solid 1px hsl(243, 23%, 30%);
       }
       .hours-in-day-main-div {
         display: flex;
         flex-direction: column;
       }
+
       .each-hour-in-day {
         background-color: hsl(243, 23%, 30%);
         display: flex;
         flex-direction: row;
         align-items: center;
+      }
+      .blank-hours-in-day-main-div {
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+      }
+      .blank-each-hour-in-day {
+        background-color: hsl(243, 23%, 30%);
+        flex-shrink: 0;
       }
       .each-hour-in-day img {
         width: 12vw;
@@ -258,6 +325,99 @@
       .each-hour-in-day-temp {
         font-family: DMSans-SemiBold;
         color: hsl(0, 0%, 100%);
+      }
+
+      .drop-down-menu-div {
+        display: none;
+        position: absolute;
+        z-index: 1;
+        background-color: hsl(243, 23%, 24%);
+      }
+      .drop-down-menu-div-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .drop-down-menu-div-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-family: DMSans-Medium;
+        color: hsl(0, 0%, 100%);
+      }
+      .drop-down-menu-div-row-small {
+        font-family: DMSans-Light;
+        color: hsl(240, 6%, 70%);
+      }
+
+      .div-hr {
+        background-color: hsl(243, 23%, 30%);
+      }
+      .active-unit {
+        background-color: hsl(243, 23%, 30%);
+      }
+
+      .drop-down-menu-days {
+        display: none;
+        position: absolute;
+        z-index: 1;
+        background-color: hsl(243, 27%, 20%);
+        width: 38vw;
+        margin-top: 90vw;
+        margin-right: 7vw;
+        border-radius: 2vw;
+      }
+      .drop-down-days-div-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        margin-left: 2vw;
+      }
+      .drop-down-days-div-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-family: DMSans-Medium;
+        color: hsl(0, 0%, 100%);
+        cursor: pointer;
+        margin-bottom: 1.5vw;
+        margin-top: 1.5vw;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+        height: 8vw;
+        width: 35vw;
+        border-radius: 2vw;
+        cursor: pointer;
+      }
+      .drop-down-days-div-row:hover {
+        background-color: hsl(243, 23%, 30%);
+      }
+      .drop-down-days-div-row:active {
+        background-color: hsl(243, 23%, 30%);
+      }
+
+      .drop-down-search-word-div {
+        display: none;
+        position: absolute;
+        z-index: 2;
+        background-color: hsl(243, 23%, 24%);
+      }
+      .drop-down-search-word-div-inside {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+      }
+
+      .city-name-row-div {
+        color: hsl(0, 0%, 100%);
+        font-family: DMSans-Light;
+      }
+      .city-name-row-div:hover {
+        background-color: hsl(243, 23%, 30%);
+      }
+      .city-name-row-div:active {
+        background-color: hsl(243, 23%, 30%);
       }
 
       .attribution {
@@ -327,13 +487,37 @@
           border: solid 2px hsl(233, 67%, 56%);
           font-size: 5vw;
         }
+        .no-search-result {
+          margin-top: 4vw;
+        }
+
+        .loading-state {
+          margin-top: 23vw;
+        }
+        .loading-state img {
+          width: 20vw;
+          margin-top: -15vw;
+        }
+        .loading-label {
+          text-align: center;
+          margin-top: 8vw;
+          width: 50vw;
+          height: fit-content;
+        }
         .today-small-div {
           height: 75vw;
           margin-top: 7vw;
           margin-left: 2vw;
           margin-right: 2vw;
           background-size: 90vw;
-          background-image: url("./assets/images/bg-today-small.svg");
+        }
+        .today-small-div-loading-state {
+          border-radius: 5vw;
+          height: 75vw;
+          margin-top: 7vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+          background-size: 90vw;
         }
 
         .city-time-div {
@@ -459,19 +643,20 @@
           border-radius: 3vw;
         }
         .hourly-forecast-title-select-div {
-          margin-top: 4vw;
+          margin-top: 1vw;
         }
         .hourly-forecast-title {
           font-size: 5vw;
-          margin-left: 4vw;
-          margin-top: 1.5vw;
+          margin-left: 2vw;
+          margin-top: 1vw;
         }
         .hourly-forecast-select {
-          border-radius: 2vw;
+          border-radius: 1.5vw;
           width: 30vw;
           height: 8vw;
-          margin-left: 8vw;
-          font-size: 4vw;
+          margin-left: 6vw;
+          margin-right: 2vw;
+          font-size: 4.5vw;
           margin-top: 1.5vw;
         }
         .hours-in-day-main-div {
@@ -488,6 +673,20 @@
           height: 14vw;
           margin-top: 5vw;
         }
+        .blank-hours-in-day-main-div {
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+          width: 83vw;
+          height: 130vw;
+        }
+        .blank-each-hour-in-day {
+          border-radius: 2vw;
+          width: 83vw;
+          height: 6vw;
+          margin-top: 3vw;
+        }
+
         .each-hour-in-day img {
           width: 12vw;
           margin-left: 2vw;
@@ -498,6 +697,93 @@
         .each-hour-in-day-temp {
           font-size: 4vw;
           margin-left: 45vw;
+        }
+
+        .drop-down-menu-div {
+          border-radius: 2vw;
+          width: 40vw;
+          height: fit-content;
+          margin-top: 85vw;
+          margin-right: 13vw;
+        }
+        .drop-down-menu-div-col {
+          width: 36vw;
+          margin-top: 2vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+          justify-content: space-around;
+        }
+        .drop-down-menu-div-row {
+          font-size: 3.5vw;
+          border-radius: 1vw;
+          margin-top: 1vw;
+          margin-bottom: 1vw;
+          padding-top: 0.5vw;
+          padding-bottom: 0.5vw;
+          padding-left: 0.5vw;
+        }
+        .drop-down-menu-div-row-small {
+          font-size: 3.2vw;
+          margin-top: 1vw;
+          margin-bottom: 1vw;
+          padding-left: 0.5vw;
+        }
+
+        .div-hr {
+          width: 33vw;
+          height: 0.5vw;
+        }
+        .drop-down-menu-days {
+          width: 38vw;
+          margin-top: 90vw;
+          margin-right: 7vw;
+          border-radius: 2vw;
+        }
+        .drop-down-days-div-col {
+          margin-left: 2vw;
+        }
+        .drop-down-days-div-row {
+          margin-bottom: 1.5vw;
+          margin-top: 1.5vw;
+          padding-top: 1vw;
+          padding-bottom: 1vw;
+          height: 8vw;
+          width: 32vw;
+          border-radius: 1.2vw;
+          margin-left: 2vw;
+          margin-right: 4vw;
+        }
+
+        .drop-down-days-div-row label {
+          margin-left: 2vw;
+        }
+        .drop-down-search-word-div {
+          width: 90vw;
+          height: 40vw;
+          margin-top: 57vw;
+          border-radius: 2vw;
+          padding-top: 2vw;
+          padding-bottom: 2vw;
+          padding-left: 2vw;
+        }
+        .drop-down-search-word-div-inside {
+          margin-left: 2vw;
+          width: 88vw;
+          height: 40vw;
+        }
+
+        .city-name-row-div {
+          color: hsl(0, 0%, 100%);
+          font-size: 4vw;
+          margin-top: 0.2vw;
+          margin-bottom: 0.2vw;
+          width: 80vw;
+          height: auto;
+          padding-top: 0.5vw;
+          padding-bottom: 0.5vw;
+          padding-left: 1.5vw;
+          margin-left: 1vw;
+          border-radius: 1vw;
         }
         .attribution {
           font-size: 3vw;
@@ -560,13 +846,37 @@
           border: solid 2px hsl(233, 67%, 56%);
           font-size: 4vw;
         }
+        .no-search-result {
+          margin-top: 4vw;
+          font-size: 5vw;
+        }
+        .loading-state {
+          margin-top: 23vw;
+        }
+        .loading-state img {
+          width: 20vw;
+          margin-top: -15vw;
+        }
+        .loading-label {
+          text-align: center;
+          margin-top: 8vw;
+          width: 50vw;
+          height: fit-content;
+        }
         .today-small-div {
           height: 75vw;
           margin-top: 8vw;
           margin-left: 3vw;
           margin-right: 3vw;
           background-size: 90vw;
-          background-image: url("./assets/images/bg-today-small.svg");
+        }
+        .today-small-div-loading-state {
+          border-radius: 5vw;
+          height: 75vw;
+          margin-top: 7vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+          background-size: 90vw;
         }
 
         .city-time-div {
@@ -700,11 +1010,12 @@
         }
         .hourly-forecast-select {
           border-radius: 2vw;
-          width: 30vw;
+          width: 28vw;
           height: 8vw;
           margin-left: 8vw;
           font-size: 4vw;
           margin-top: 1.5vw;
+          margin-right: 2vw;
         }
         .hours-in-day-main-div {
           margin-left: 2vw;
@@ -720,6 +1031,19 @@
           height: 14vw;
           margin-top: 5vw;
         }
+        .blank-hours-in-day-main-div {
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+          width: 85vw;
+          height: 130vw;
+        }
+        .blank-each-hour-in-day {
+          border-radius: 2vw;
+          width: 80vw;
+          height: 6vw;
+          margin-top: 5vw;
+        }
         .each-hour-in-day img {
           width: 12vw;
           margin-left: 2vw;
@@ -730,6 +1054,94 @@
         .each-hour-in-day-temp {
           font-size: 4vw;
           margin-left: 45vw;
+        }
+
+        .drop-down-menu-div {
+          border-radius: 2vw;
+          width: 40vw;
+          height: fit-content;
+          margin-top: 85vw;
+          margin-right: 15vw;
+        }
+        .drop-down-menu-div-col {
+          width: 36vw;
+          margin-top: 2vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+          justify-content: space-around;
+        }
+        .drop-down-menu-div-row {
+          font-size: 3.5vw;
+          border-radius: 1vw;
+          margin-top: 1vw;
+          margin-bottom: 1vw;
+          padding-top: 0.5vw;
+          padding-bottom: 0.5vw;
+          padding-left: 0.5vw;
+        }
+        .drop-down-menu-div-row-small {
+          font-size: 3.2vw;
+          margin-top: 1vw;
+          margin-bottom: 1vw;
+          padding-left: 0.5vw;
+        }
+
+        .div-hr {
+          width: 33vw;
+          height: 0.5vw;
+        }
+
+        .drop-down-menu-days {
+          width: 37vw;
+          margin-top: 90vw;
+          margin-right: 12vw;
+          border-radius: 2vw;
+        }
+        .drop-down-days-div-col {
+          margin-left: 2vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row {
+          margin-bottom: 1.5vw;
+          margin-top: 1.5vw;
+          padding-top: 1vw;
+          padding-bottom: 1vw;
+          height: 8vw;
+          width: 32vw;
+          border-radius: 1vw;
+          margin-left: 2vw;
+          margin-right: 4vw;
+        }
+        .drop-down-days-div-row label {
+          margin-left: 2vw;
+        }
+        .drop-down-search-word-div {
+          width: 91vw;
+          height: 40vw;
+          margin-top: 55vw;
+          border-radius: 2vw;
+          padding-top: 2vw;
+          padding-bottom: 2vw;
+          padding-left: 2vw;
+        }
+        .drop-down-search-word-div-inside {
+          margin-left: 2vw;
+          width: 88vw;
+          height: 40vw;
+        }
+
+        .city-name-row-div {
+          color: hsl(0, 0%, 100%);
+          font-size: 3.5vw;
+          margin-top: 0.2vw;
+          margin-bottom: 0.2vw;
+          width: 85vw;
+          height: auto;
+          padding-top: 0.5vw;
+          padding-bottom: 0.5vw;
+          padding-left: 1.8vw;
+          margin-left: 0.5vw;
+          border-radius: 1vw;
         }
         .attribution {
           font-size: 2.8vw;
@@ -791,13 +1203,39 @@
           border: solid 2px hsl(233, 67%, 56%);
           font-size: 3.5vw;
         }
+        .no-search-result {
+          margin-top: 5vw;
+          font-size: 4.5vw;
+        }
+        .loading-state {
+          margin-top: 18vw;
+          width: 30vw;
+          height: 30vw;
+        }
+        .loading-state img {
+          width: 15vw;
+          margin-top: -10vw;
+        }
+        .loading-label {
+          text-align: center;
+          margin-top: 8vw;
+          width: 30vw;
+          font-size: 3vw;
+        }
         .today-small-div {
           height: 75vw;
           margin-top: 7vw;
           margin-left: 3.5vw;
           margin-right: 3.5vw;
           background-size: 90vw;
-          background-image: url("./assets/images/bg-today-small.svg");
+        }
+        .today-small-div-loading-state {
+          border-radius: 5vw;
+          height: 75vw;
+          margin-top: 7vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+          background-size: 90vw;
         }
 
         .city-time-div {
@@ -868,7 +1306,7 @@
         .daily-forecast-label {
           font-family: DMSans-SemiBold;
           color: hsl(0, 0%, 100%);
-          font-size: 5vw;
+          font-size: 4vw;
           margin-left: 2vw;
         }
 
@@ -925,16 +1363,17 @@
           margin-top: 4vw;
         }
         .hourly-forecast-title {
-          font-size: 5vw;
+          font-size: 4vw;
           margin-left: 4vw;
           margin-top: 1.5vw;
         }
         .hourly-forecast-select {
           border-radius: 2vw;
-          width: 30vw;
+          width: 28vw;
           height: 8vw;
           margin-left: 8vw;
-          font-size: 4vw;
+          margin-right: 2vw;
+          font-size: 3.2vw;
           margin-top: 1.5vw;
         }
         .hours-in-day-main-div {
@@ -951,6 +1390,19 @@
           height: 14vw;
           margin-top: 5vw;
         }
+        .blank-hours-in-day-main-div {
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+          width: 85vw;
+          height: 130vw;
+        }
+        .blank-each-hour-in-day {
+          border-radius: 2vw;
+          width: 80vw;
+          height: 7vw;
+          margin-top: 5vw;
+        }
         .each-hour-in-day img {
           width: 12vw;
           margin-left: 2vw;
@@ -962,6 +1414,93 @@
           font-size: 4vw;
           margin-left: 45vw;
         }
+        .drop-down-menu-div {
+          border-radius: 1.5vw;
+          width: 40vw;
+          height: fit-content;
+          margin-top: 80vw;
+          margin-right: 20vw;
+        }
+        .drop-down-menu-div-col {
+          width: 36vw;
+          margin-top: 2vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
+          justify-content: space-around;
+        }
+        .drop-down-menu-div-row {
+          font-size: 3.2vw;
+          border-radius: 1vw;
+          margin-top: 1vw;
+          margin-bottom: 1vw;
+          padding-top: 0.5vw;
+          padding-bottom: 0.5vw;
+          padding-left: 0.5vw;
+        }
+        .drop-down-menu-div-row-small {
+          font-size: 3vw;
+          margin-top: 1vw;
+          margin-bottom: 1vw;
+          padding-left: 0.5vw;
+        }
+
+        .div-hr {
+          width: 35vw;
+          height: 0.3vw;
+        }
+        .drop-down-menu-days {
+          width: 37vw;
+          margin-top: 90vw;
+          margin-right: 12vw;
+          border-radius: 2vw;
+        }
+        .drop-down-days-div-col {
+          margin-left: 2vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row {
+          margin-bottom: 1.5vw;
+          margin-top: 1.5vw;
+          padding-top: 1vw;
+          padding-bottom: 1vw;
+          height: 8vw;
+          width: 32vw;
+          border-radius: 1vw;
+          margin-left: 2vw;
+          margin-right: 4vw;
+        }
+        .drop-down-days-div-row label {
+          margin-left: 2vw;
+        }
+        .drop-down-search-word-div {
+          width: 93vw;
+          height: 40vw;
+          margin-top: 55vw;
+          border-radius: 2vw;
+          padding-top: 2vw;
+          padding-bottom: 2vw;
+          padding-left: 2vw;
+        }
+        .drop-down-search-word-div-inside {
+          margin-left: 2vw;
+          width: 88vw;
+          height: 40vw;
+        }
+
+        .city-name-row-div {
+          color: hsl(0, 0%, 100%);
+          font-size: 3vw;
+          margin-top: 0.2vw;
+          margin-bottom: 0.2vw;
+          width: 85vw;
+          height: auto;
+          padding-top: 0.5vw;
+          padding-bottom: 0.5vw;
+          padding-left: 1.8vw;
+          margin-left: 0.5vw;
+          border-radius: 1vw;
+        }
+
         .attribution {
           font-size: 2.8vw;
           margin-top: 150vw;
@@ -1022,13 +1561,40 @@
           border: solid 2px hsl(233, 67%, 56%);
           font-size: 3.5vw;
         }
+        .no-search-result {
+          margin-top: 5vw;
+          font-size: 4.5vw;
+        }
+        .loading-state {
+          margin-top: 18vw;
+          width: 30vw;
+          height: 30vw;
+        }
+        .loading-state img {
+          width: 15vw;
+          margin-top: -10vw;
+        }
+        .loading-label {
+          text-align: center;
+          margin-top: 8vw;
+          width: 30vw;
+          font-size: 4vw;
+        }
         .today-small-div {
           height: 75vw;
           margin-top: 6vw;
           margin-left: 6vw;
           margin-right: 6vw;
           background-size: 85vw;
-          background-image: url("./assets/images/bg-today-small.svg");
+        }
+
+        .today-small-div-loading-state {
+          border-radius: 5vw;
+          height: 75vw;
+          margin-top: 6vw;
+          margin-left: 6vw;
+          margin-right: 6vw;
+          background-size: 85vw;
         }
 
         .city-time-div {
@@ -1053,8 +1619,8 @@
           margin-left: 14vw;
         }
         .today-temp-label {
-          font-size: 18vw;
-          margin-right: 4vw;
+          font-size: 16vw;
+          margin-right: 6vw;
         }
         .today-other-col-div {
           display: flex;
@@ -1099,7 +1665,7 @@
         .daily-forecast-label {
           font-family: DMSans-SemiBold;
           color: hsl(0, 0%, 100%);
-          font-size: 5vw;
+          font-size: 4vw;
           margin-left: 5vw;
         }
 
@@ -1156,17 +1722,18 @@
           margin-top: 4vw;
         }
         .hourly-forecast-title {
-          font-size: 5vw;
+          font-size: 4vw;
           margin-left: 4vw;
           margin-top: 1.5vw;
         }
         .hourly-forecast-select {
           border-radius: 2vw;
-          width: 30vw;
+          width: 26vw;
           height: 8vw;
           margin-left: 8vw;
-          font-size: 4vw;
+          font-size: 3vw;
           margin-top: 1.5vw;
+          margin-right: 2vw;
         }
         .hours-in-day-main-div {
           margin-left: 2vw;
@@ -1182,6 +1749,19 @@
           height: 14vw;
           margin-top: 5vw;
         }
+        .blank-hours-in-day-main-div {
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+          width: 85vw;
+          height: 130vw;
+        }
+        .blank-each-hour-in-day {
+          border-radius: 2vw;
+          width: 80vw;
+          height: 8vw;
+          margin-top: 5vw;
+        }
         .each-hour-in-day img {
           width: 12vw;
           margin-left: 2vw;
@@ -1193,6 +1773,93 @@
           font-size: 4vw;
           margin-left: 45vw;
         }
+        .drop-down-menu-div {
+          border-radius: 1vw;
+          width: 25vw;
+          height: fit-content;
+          margin-top: 65vw;
+          margin-right: 10vw;
+        }
+        .drop-down-menu-div-col {
+          width: 23vw;
+          margin-top: 1vw;
+          margin-left: 1vw;
+          margin-right: 1vw;
+          justify-content: space-around;
+        }
+        .drop-down-menu-div-row {
+          font-size: 2vw;
+          border-radius: 1vw;
+          margin-top: 1vw;
+          margin-bottom: 1vw;
+          padding-top: 0.5vw;
+          padding-bottom: 0.5vw;
+          padding-left: 0.5vw;
+        }
+        .drop-down-menu-div-row-small {
+          font-size: 2vw;
+          margin-top: 1vw;
+          margin-bottom: 1vw;
+          padding-left: 0.5vw;
+        }
+
+        .div-hr {
+          width: 35vw;
+          height: 0.3vw;
+        }
+        .drop-down-menu-days {
+          width: 37vw;
+          margin-top: 90vw;
+          margin-right: 12vw;
+          border-radius: 2vw;
+        }
+        .drop-down-days-div-col {
+          margin-left: 2vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row {
+          margin-bottom: 1.5vw;
+          margin-top: 1.5vw;
+          padding-top: 1vw;
+          padding-bottom: 1vw;
+          height: 8vw;
+          width: 32vw;
+          border-radius: 1vw;
+          margin-left: 2vw;
+          margin-right: 4vw;
+        }
+        .drop-down-days-div-row label {
+          margin-left: 2vw;
+        }
+        .drop-down-search-word-div {
+          width: 86vw;
+          height: 40vw;
+          margin-top: 52vw;
+          border-radius: 2vw;
+          padding-top: 2vw;
+          padding-bottom: 2vw;
+          padding-left: 2vw;
+        }
+        .drop-down-search-word-div-inside {
+          margin-left: 0.5vw;
+          width: 85vw;
+          height: 40vw;
+        }
+
+        .city-name-row-div {
+          color: hsl(0, 0%, 100%);
+          font-size: 3vw;
+          margin-top: 0.2vw;
+          margin-bottom: 0.2vw;
+          width: 80vw;
+          height: auto;
+          padding-top: 0.5vw;
+          padding-bottom: 0.5vw;
+          padding-left: 1.8vw;
+          margin-left: 0.5vw;
+          border-radius: 1vw;
+        }
+
         .attribution {
           font-size: 2.8vw;
           margin-top: 150vw;
@@ -1263,6 +1930,26 @@
           font-size: 1.5vw;
           margin-left: 1vw;
         }
+        .no-search-result {
+          margin-top: 2vw;
+          font-size: 1.5vw;
+        }
+        .loading-state {
+          margin-top: 2vw;
+          width: 10vw;
+          height: 10vw;
+        }
+        .loading-state img {
+          width: 6vw;
+          margin-top: -4vw;
+        }
+        .loading-label {
+          text-align: center;
+          margin-top: 7.8vw;
+          width: 6vw;
+          font-size: 1.5vw;
+          align-items: center;
+        }
         .today-small-div {
           width: 57vw;
           height: 20.5vw;
@@ -1274,6 +1961,16 @@
           align-items: center;
           background-image: url("./assets/images/bg-today-large.svg");
         }
+        .today-small-div-loading-state {
+          border-radius: 1vw;
+          width: 57vw;
+          height: 20.5vw;
+          margin-top: 2vw;
+          margin-left: 6vw;
+          margin-right: 2vw;
+          background-size: 57vw;
+        }
+
         .city-time-div {
           width: 80vw;
           height: auto;
@@ -1389,12 +2086,15 @@
         }
         .hourly-forecast-select {
           border-radius: 0.5vw;
-          width: 8vw;
+          width: 7vw;
           height: 2.5vw;
           margin-left: 4vw;
           font-size: 1.2vw;
           margin-top: 1vw;
-          margin-top: 1.5vw;
+          margin-right: 2vw;
+        }
+        .hourly-forecast-select .dropdown-arrow {
+          width: 0.8vw;
         }
         .hours-in-day-main-div {
           width: 24vw;
@@ -1410,6 +2110,22 @@
           height: 15vw;
           margin-top: 1vw;
         }
+        .blank-hours-in-day-main-div {
+          width: 24vw;
+          height: 45vw;
+          overflow-y: scroll;
+          margin-left: 2vw;
+          margin-right: 1vw;
+          margin-top: 2vw;
+          
+        }
+        .blank-each-hour-in-day {
+          border-radius: 0.5vw;
+          width: 24vw;
+          height: 3vw;
+          margin-top: 1vw;
+          
+        }
         .each-hour-in-day img {
           width: 3vw;
           margin-left: 1vw;
@@ -1421,6 +2137,94 @@
           font-size: 1.5vw;
           margin-left: 10vw;
           margin-right: 2vw;
+        }
+
+        .drop-down-menu-div {
+          border-radius: 0.5vw;
+          width: 14vw;
+          height: fit-content;
+          margin-top: 35vw;
+          margin-right: 5vw;
+        }
+        .drop-down-menu-div-col {
+          width: 12vw;
+          margin-top: 1vw;
+          margin-left: 1vw;
+          margin-right: 1.2vw;
+          justify-content: space-around;
+        }
+        .drop-down-menu-div-row {
+          font-size: 1.3vw;
+          border-radius: 0.2vw;
+          margin-top: 0.5vw;
+          margin-bottom: 0.5vw;
+          padding-top: 0.2vw;
+          padding-bottom: 0.2vw;
+          padding-left: 0.2vw;
+        }
+        .drop-down-menu-div-row-small {
+          font-size: 1.2vw;
+          margin-top: 0.5vw;
+          margin-bottom: 0.5vw;
+          padding-left: 0.2vw;
+        }
+
+        .div-hr {
+          width: 12vw;
+          height: 0.3vw;
+        }
+
+        .drop-down-menu-days {
+          width: 16vw;
+          margin-top: 28vw;
+          margin-right: 10vw;
+          border-radius: 0.5vw;
+        }
+        .drop-down-days-div-col {
+          margin-left: 2vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row {
+          margin-bottom: 0.3vw;
+          margin-top: 0.3vw;
+          padding-top: 0.1vw;
+          padding-bottom: 0.1vw;
+          height: 2.7vw;
+          width: 14vw;
+          border-radius: 0.3vw;
+          margin-left: 2vw;
+          margin-right: 4vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row label {
+          margin-left: 1vw;
+        }
+        .drop-down-search-word-div {
+          width: 37vw;
+          height: 20vw;
+          margin-top: 25vw;
+          border-radius: 0.8vw;
+          padding-top: 2vw;
+          padding-bottom: 2vw;
+          padding-left: 0.5vw;
+        }
+        .drop-down-search-word-div-inside {
+          width: 36vw;
+          height: 19vw;
+        }
+
+        .city-name-row-div {
+          color: hsl(0, 0%, 100%);
+          font-size: 1.2vw;
+          margin-top: 0.2vw;
+          margin-bottom: 0.2vw;
+          width: 36vw;
+          height: auto;
+          padding-top: 0.2vw;
+          padding-bottom: 0.2vw;
+          padding-left: 1.2vw;
+          margin-left: 0.05vw;
+          border-radius: 0.4vw;
         }
         .attribution {
           font-size: 1.2vw;
@@ -1485,6 +2289,26 @@
           font-size: 1.5vw;
           margin-left: 1vw;
         }
+        .no-search-result {
+          margin-top: 2vw;
+          font-size: 2vw;
+        }
+        .loading-state {
+          margin-top: 2vw;
+          width: 10vw;
+          height: 10vw;
+        }
+        .loading-state img {
+          width: 6vw;
+          margin-top: -4vw;
+        }
+        .loading-label {
+          text-align: center;
+          margin-top: 7.8vw;
+          width: 6vw;
+          font-size: 1.5vw;
+          align-items: center;
+        }
         .today-small-div {
           width: 57vw;
           height: 20.5vw;
@@ -1496,6 +2320,16 @@
           align-items: center;
           background-image: url("./assets/images/bg-today-large.svg");
         }
+        .today-small-div-loading-state {
+          border-radius: 1vw;
+          width: 57vw;
+          height: 20.5vw;
+          margin-top: 2vw;
+          margin-left: 6vw;
+          margin-right: 2vw;
+          background-size: 57vw;
+        }
+
         .city-time-div {
           width: 20vw;
           height: auto;
@@ -1560,7 +2394,7 @@
         .daily-forecast-label {
           font-family: DMSans-SemiBold;
           color: hsl(0, 0%, 100%);
-          font-size: 2vw;
+          font-size: 1.4vw;
           margin-bottom: 1vw;
         }
 
@@ -1607,17 +2441,21 @@
           margin-top: 1.5vw;
         }
         .hourly-forecast-title {
-          font-size: 1.7vw;
+          font-size: 1.4vw;
           margin-left: 2vw;
           margin-top: 0.5vw;
         }
         .hourly-forecast-select {
           border-radius: 0.5vw;
-          width: 7vw;
+          width: 6.7vw;
           height: 2.5vw;
           margin-left: 4vw;
-          font-size: 1.2vw;
+          font-size: 1vw;
           margin-top: 0.5vw;
+          margin-right: 1vw;
+        }
+        .hourly-forecast-select .dropdown-arrow {
+          width: 0.9vw;
         }
         .hours-in-day-main-div {
           width: 24vw;
@@ -1633,6 +2471,20 @@
           height: 15vw;
           margin-top: 1vw;
         }
+        .blank-hours-in-day-main-div {
+          width: 24vw;
+          height: 45vw;
+          overflow-y: scroll;
+          margin-left: 2vw;
+          margin-right: 1vw;
+          margin-top: 2vw;
+        }
+        .blank-each-hour-in-day {
+          border-radius: 0.5vw;
+          width: 24vw;
+          height: 3vw;
+          margin-top: 1vw;
+        }
         .each-hour-in-day img {
           width: 3vw;
           margin-left: 1vw;
@@ -1645,6 +2497,93 @@
           margin-left: 10vw;
           margin-right: 2vw;
         }
+        .drop-down-menu-div {
+          border-radius: 0.5vw;
+          width: 14vw;
+          height: fit-content;
+          margin-top: 35vw;
+          margin-right: 5vw;
+        }
+        .drop-down-menu-div-col {
+          width: 12vw;
+          margin-top: 1vw;
+          margin-left: 1vw;
+          margin-right: 1.2vw;
+          justify-content: space-around;
+        }
+        .drop-down-menu-div-row {
+          font-size: 1.3vw;
+          border-radius: 0.2vw;
+          margin-top: 0.5vw;
+          margin-bottom: 0.5vw;
+          padding-top: 0.2vw;
+          padding-bottom: 0.2vw;
+          padding-left: 0.2vw;
+        }
+        .drop-down-menu-div-row-small {
+          font-size: 1.2vw;
+          margin-top: 0.5vw;
+          margin-bottom: 0.5vw;
+          padding-left: 0.2vw;
+        }
+
+        .div-hr {
+          width: 12vw;
+          height: 0.1vw;
+        }
+        .drop-down-menu-days {
+          width: 16vw;
+          margin-top: 26.8vw;
+          margin-right: 10vw;
+          border-radius: 0.5vw;
+        }
+        .drop-down-days-div-col {
+          margin-left: 2vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row {
+          margin-bottom: 0.3vw;
+          margin-top: 0.3vw;
+          padding-top: 0.1vw;
+          padding-bottom: 0.1vw;
+          height: 2.7vw;
+          width: 14vw;
+          border-radius: 0.3vw;
+          margin-left: 2vw;
+          margin-right: 4vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row label {
+          margin-left: 1vw;
+        }
+        .drop-down-search-word-div {
+          width: 37vw;
+          height: 16vw;
+          margin-top: 21vw;
+          border-radius: 0.8vw;
+          padding-top: 1vw;
+          padding-bottom: 1vw;
+          padding-left: 0.5vw;
+        }
+        .drop-down-search-word-div-inside {
+          width: 36vw;
+          height: 16vw;
+        }
+
+        .city-name-row-div {
+          color: hsl(0, 0%, 100%);
+          font-size: 1.2vw;
+          margin-top: 0.2vw;
+          margin-bottom: 0.2vw;
+          width: 36vw;
+          height: auto;
+          padding-top: 0.2vw;
+          padding-bottom: 0.2vw;
+          padding-left: 1.2vw;
+          margin-left: 0.05vw;
+          border-radius: 0.4vw;
+        }
+
         .attribution {
           font-size: 1.2vw;
           margin-top: 20vw;
@@ -1709,6 +2648,27 @@
           font-size: 1.2vw;
           margin-left: 1vw;
         }
+        .no-search-result {
+          margin-top: 1.5vw;
+          font-size: 1.5vw;
+        }
+
+        .loading-state {
+          margin-top: 2vw;
+          width: 10vw;
+          height: 10vw;
+        }
+        .loading-state img {
+          width: 6vw;
+          margin-top: -4vw;
+        }
+        .loading-label {
+          text-align: center;
+          margin-top: 7.8vw;
+          width: 6vw;
+          font-size: 1.5vw;
+          align-items: center;
+        }
         .today-small-div {
           width: 57vw;
           height: 20.5vw;
@@ -1720,6 +2680,16 @@
           align-items: center;
           background-image: url("./assets/images/bg-today-large.svg");
         }
+        .today-small-div-loading-state {
+          border-radius: 1vw;
+          width: 57vw;
+          height: 20.5vw;
+          margin-top: 2vw;
+          margin-left: 6vw;
+          margin-right: 2vw;
+          background-size: 57vw;
+        }
+
         .city-time-div {
           width: 20vw;
           height: auto;
@@ -1837,9 +2807,10 @@
         }
         .hourly-forecast-select {
           border-radius: 0.5vw;
-          width: 9vw;
+          width: 8vw;
           height: 3vw;
-          margin-left: 3vw;
+          margin-left: 2vw;
+          margin-right: 2vw;
           font-size: 1.1vw;
           margin-top: 1.2vw;
         }
@@ -1858,6 +2829,22 @@
           margin-top: 1vw;
           justify-content: space-around;
         }
+        .blank-hours-in-day-main-div {
+          width: 24vw;
+          height: 45vw;
+          overflow-y: scroll;
+          margin-left: 2vw;
+          margin-right: 1vw;
+          margin-top: 2vw;
+        }
+        .blank-each-hour-in-day {
+          border-radius: 0.5vw;
+          width: 24vw;
+          height: 3vw;
+          margin-top: 1vw;
+          justify-content: space-around;
+        }
+
         .each-hour-in-day img {
           width: 3vw;
           margin-left: 1vw;
@@ -1870,6 +2857,94 @@
           margin-left: 10vw;
           margin-right: 2vw;
         }
+
+        .drop-down-menu-div {
+          border-radius: 0.5vw;
+          width: 14vw;
+          height: fit-content;
+          margin-top: 35vw;
+          margin-right: 5vw;
+        }
+        .drop-down-menu-div-col {
+          width: 12vw;
+          margin-top: 1vw;
+          margin-left: 1vw;
+          margin-right: 1.2vw;
+          justify-content: space-around;
+        }
+        .drop-down-menu-div-row {
+          font-size: 1.3vw;
+          border-radius: 0.2vw;
+          margin-top: 0.5vw;
+          margin-bottom: 0.5vw;
+          padding-top: 0.2vw;
+          padding-bottom: 0.2vw;
+          padding-left: 0.2vw;
+        }
+        .drop-down-menu-div-row-small {
+          font-size: 1.2vw;
+          margin-top: 0.5vw;
+          margin-bottom: 0.5vw;
+          padding-left: 0.2vw;
+        }
+
+        .div-hr {
+          width: 12vw;
+          height: 0.1vw;
+        }
+        .drop-down-menu-days {
+          width: 16vw;
+          margin-top: 26.8vw;
+          margin-right: 8vw;
+          border-radius: 0.5vw;
+        }
+        .drop-down-days-div-col {
+          margin-left: 2vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row {
+          margin-bottom: 0.3vw;
+          margin-top: 0.3vw;
+          padding-top: 0.1vw;
+          padding-bottom: 0.1vw;
+          height: 2.7vw;
+          width: 14vw;
+          border-radius: 0.3vw;
+          margin-left: 2vw;
+          margin-right: 4vw;
+          align-items: center;
+        }
+        .drop-down-days-div-row label {
+          margin-left: 1vw;
+        }
+        .drop-down-search-word-div {
+          width: 37vw;
+          height: 14vw;
+          margin-top: 18vw;
+          border-radius: 0.6vw;
+          padding-top: 1vw;
+          padding-bottom: 1vw;
+          padding-left: 0.5vw;
+        }
+        .drop-down-search-word-div-inside {
+          width: 36vw;
+          height: 14vw;
+        }
+
+        .city-name-row-div {
+          color: hsl(0, 0%, 100%);
+          font-size: 1vw;
+          margin-top: 0.2vw;
+          margin-bottom: 0.2vw;
+          width: 36vw;
+          height: auto;
+          padding-top: 0.2vw;
+          padding-bottom: 0.2vw;
+          padding-left: 1.2vw;
+          margin-left: 0.05vw;
+          border-radius: 0.2vw;
+        }
+
         .attribution {
           font-size: 1.2vw;
           margin-top: 20vw;
@@ -1880,7 +2955,7 @@
       }
     </style>
   </head>
-  <body>
+  <body onload="onLoad()">
     <div class="logo-search-container">
       <img src="./assets/images/logo.svg" class="logo" />
 
@@ -1888,9 +2963,63 @@
         <img src="./assets/images/icon-units.svg" />
 
         <label>Units</label>
-        <img class="dropdown-arrow" src="./assets/images/icon-dropdown.svg" />
+        <img
+          onclick="showDropDownUnit()"
+          class="dropdown-arrow"
+          style="cursor: pointer"
+          src="./assets/images/icon-dropdown.svg"
+        />
+        <div id="drop-down-menu-div" class="drop-down-menu-div">
+          <div class="drop-down-menu-div-col">
+            <div
+              id="switch_li"
+              class="drop-down-menu-div-row"
+              style="cursor: pointer"
+              onclick="switchUnit()"
+            >
+              Switch to Metric
+            </div>
+
+            <div class="drop-down-menu-div-row-small">Temperature</div>
+            <div id="celcius" class="drop-down-menu-div-row">
+              Celcius(°C)
+              <img src="./assets/images/icon-checkmark.svg" />
+            </div>
+
+            <div id="fahrenheit" class="drop-down-menu-div-row">
+              <label class="li-bold"> Fahrenheit(°F) </label>
+              <img src="./assets/images/icon-checkmark.svg" />
+            </div>
+
+            <div class="div-hr"></div>
+            <div class="drop-down-menu-div-row-small">Wind Speed</div>
+            <div id="kmh" class="drop-down-menu-div-row">
+              <label class="li-bold"> km/h </label>
+              <img src="./assets/images/icon-checkmark.svg" />
+            </div>
+
+            <div id="mph" class="drop-down-menu-div-row">
+              <label class="li-bold"> mph </label>
+              <img src="./assets/images/icon-checkmark.svg" />
+            </div>
+
+            <div class="div-hr"></div>
+            <div class="drop-down-menu-div-row-small">Precipitation</div>
+
+            <div id="mm" class="drop-down-menu-div-row">
+              <label class="li-bold"> Millimeters(mm) </label>
+              <img src="./assets/images/icon-checkmark.svg" />
+            </div>
+
+            <div id="inch" class="drop-down-menu-div-row">
+              <label class="li-bold"> Inches(inch) </label>
+              <img src="./assets/images/icon-checkmark.svg" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="how-sky-div">
       <h1>How's the sky looking today?</h1>
     </div>
@@ -1903,86 +3032,152 @@
           type="text"
           placeholder="Search for a place..."
           autofocus
+          onclick="showTypedSearchWord()"
+          onchange="storeCity()"
         />
+        <div id="drop-down-search-word-div" class="drop-down-search-word-div">
+          <div
+            id="drop-down-search-word-div-inside"
+            class="drop-down-search-word-div-inside"
+          ></div>
+        </div>
       </div>
       <button onclick="search()">Search</button>
     </div>
-    <div class="today-small-div">
-      <div class="city-time-div">
-        <label id="city-name" class="city-label"></label>
-        <label id="current-time" class="time-label"></label>
-      </div>
-      <div class="today-icon-temp-div">
-        <img id="current-weather-icon" />
-        <label id="current-temp" class="today-temp-label"></label>
-      </div>
+    <div id="no-search-result" class="no-search-result">
+      No search result found !
     </div>
-    <div class="today-other-col-div">
-      <div class="today-other-row-div">
-        <div class="each-small-div">
-          <label class="each-small-params-label">Feels like</label>
-          <label id="feels-like" class="each-small-value-label"
-            ><span>°</span></label
-          >
+    <div id="display-weather-results">
+      <div id="today-small-div" class="today-small-div">
+        <div id="loading-state" class="loading-state">
+          <div class="loading-label">Loading...</div>
+          <img src="assets/images/icon-loading.svg" />
         </div>
-        <div class="each-small-div">
-          <label class="each-small-params-label">Humidity</label>
-          <label id="current-humid" class="each-small-value-label"></label>
-        </div>
-      </div>
-      <div class="today-other-row-div">
-        <div class="each-small-div">
-          <label class="each-small-params-label">Wind</label>
-          <label id="current-wind-speed" class="each-small-value-label"></label>
-        </div>
-        <div class="each-small-div">
-          <label class="each-small-params-label">Precipitation</label>
-          <label
-            id="current-precipitation"
-            class="each-small-value-label"
-          ></label>
-        </div>
-      </div>
-    </div>
-    <div id="daily-forecast-div" class="daily-forecast-main-div">
-      <label class="daily-forecast-label">Daily forecast</label>
-      <div class="daily-forecast-days-div-col">
-        <div
-          id="daily-forecast-days-div-row1"
-          class="daily-forecast-days-div-row"
-        ></div>
-        <div
-          id="daily-forecast-days-div-row2"
-          class="daily-forecast-days-div-row"
-        ></div>
-        <div
-          id="daily-forecast-days-div-row3"
-          class="daily-forecast-days-div-row"
-        ></div>
-      </div>
-    </div>
-    <div class="hourly-forecast-main-div">
-      <div class="hourly-forecast-title-select-div">
-        <label class="hourly-forecast-title">Hourly forecast</label>
-        <!-- Insert hourly forecast for the selected day here -->
 
-        <select
-          id="select-day"
-          class="hourly-forecast-select"
-          onchange="selectDay()"
-        >
-          <option value="Sunday">Sunday</option>
-          <option value="Monday">Monday</option>
-          <option value="Tuesday">Tuesday</option>
-          <option value="Wednesday">Wednesday</option>
-          <option value="Thursday">Thursday</option>
-          <option value="Friday">Friday</option>
-          <option value="Saturday">Saturday</option>
-        </select>
+        <div id="city-time-div" class="city-time-div">
+          <label id="city-name" class="city-label"></label>
+          <label id="current-time" class="time-label"></label>
+        </div>
+        <div id="today-icon-temp-div" class="today-icon-temp-div">
+          <img id="current-weather-icon" />
+          <label id="current-temp" class="today-temp-label"></label>
+        </div>
       </div>
-      <div id="hours-in-day-main-div" class="hours-in-day-main-div"></div>
-    </div>
+      <div class="today-other-col-div">
+        <div class="today-other-row-div">
+          <div class="each-small-div">
+            <label class="each-small-params-label">Feels like</label>
+            <label id="feels-like" class="each-small-value-label"></label>
+          </div>
+          <div class="each-small-div">
+            <label class="each-small-params-label">Humidity</label>
+            <label id="current-humid" class="each-small-value-label"></label>
+          </div>
+        </div>
+        <div class="today-other-row-div">
+          <div class="each-small-div">
+            <label class="each-small-params-label">Wind</label>
+            <label
+              id="current-wind-speed"
+              class="each-small-value-label"
+            ></label>
+          </div>
+          <div class="each-small-div">
+            <label class="each-small-params-label">Precipitation</label>
+            <label
+              id="current-precipitation"
+              class="each-small-value-label"
+            ></label>
+          </div>
+        </div>
+      </div>
+      <div id="daily-forecast-div" class="daily-forecast-main-div">
+        <label class="daily-forecast-label">Daily forecast</label>
+        <div class="daily-forecast-days-div-col">
+          <div
+            id="daily-forecast-days-div-row1"
+            class="daily-forecast-days-div-row"
+          ></div>
+          <div
+            id="daily-forecast-days-div-row2"
+            class="daily-forecast-days-div-row"
+          ></div>
+          <div
+            id="daily-forecast-days-div-row3"
+            class="daily-forecast-days-div-row"
+          ></div>
+        </div>
+      </div>
+      <div class="hourly-forecast-main-div">
+        <div class="hourly-forecast-title-select-div">
+          <label class="hourly-forecast-title">Hourly forecast</label>
 
+          <div class="hourly-forecast-select">
+            <label id="day_label_in_hourly_forecast_select">Day</label>
+            <img
+              onclick="showDropDownDays()"
+              class="dropdown-arrow"
+              style="cursor: pointer"
+              src="./assets/images/icon-dropdown.svg"
+            />
+            <div id="drop-down-menu-days" class="drop-down-menu-days">
+              <div class="drop-down-days-div-col">
+                <div
+                  onclick="selectDay(event)"
+                  id="Sunday"
+                  class="drop-down-days-div-row"
+                >
+                  Sunday
+                </div>
+                <div
+                  onclick="selectDay(event)"
+                  id="Monday"
+                  class="drop-down-days-div-row"
+                >
+                  Monday
+                </div>
+                <div
+                  onclick="selectDay(event)"
+                  id="Tuesday"
+                  class="drop-down-days-div-row"
+                >
+                  Tuesday
+                </div>
+                <div
+                  onclick="selectDay(event)"
+                  id="Wednesday"
+                  class="drop-down-days-div-row"
+                >
+                  Wednesday
+                </div>
+                <div
+                  onclick="selectDay(event)"
+                  id="Thursday"
+                  class="drop-down-days-div-row"
+                >
+                  Thursday
+                </div>
+                <div
+                  onclick="selectDay(event)"
+                  id="Friday"
+                  class="drop-down-days-div-row"
+                >
+                  Friday
+                </div>
+                <div
+                  onclick="selectDay(event)"
+                  id="Saturday"
+                  class="drop-down-days-div-row"
+                >
+                  Saturday
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="hours-in-day-main-div" class="hours-in-day-main-div"></div>
+      </div>
+    </div>
     <div class="attribution">
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
@@ -2003,33 +3198,49 @@
         hourly_temp,
         hourly_weather_code;
 
+      let daily_forecast_div_row1,
+        daily_forecast_div_row2,
+        daily_forecast_div_row3;
+
+      const days_arr = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      const months_arr = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+
+      const onLoad = () => {
+        //display blank card on load
+        createDailyWeatherBlankCard();
+        createHourlyWeatherBlankCard();
+        localStorage.setItem("unit", "metric");
+        let savedSearchWord = localStorage.getItem("typedSearchWord");
+        if (savedSearchWord === null) {
+          localStorage.setItem("typedSearchWord", "");
+          return;
+        } else return;
+      };
       const convertTZ = (date, timezone) => {
         return new Date(date.toLocaleString("en-US", { timeZone: timezone }));
       };
       const customTimeStr = (time) => {
-        const days_arr = [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ];
-        const months_arr = [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ];
         let date = time.getDate();
         let month = time.getMonth();
         let year = time.getFullYear();
@@ -2124,10 +3335,12 @@
         }
         return srcImg;
       };
-      const selectDay = () => {
+      const selectDay = (event) => {
+        let day_selected = event.target.id;
         document.getElementById("hours-in-day-main-div").innerHTML = ""; //clear all element under this parent id, can do refresh when choose different day
-
-        let day_selected = document.getElementById("select-day").value;
+        document.getElementById(
+          "day_label_in_hourly_forecast_select"
+        ).innerText = day_selected;
         let start_index = 0;
         let end_index = 0;
         let num_hours_in_day = 24;
@@ -2194,6 +3407,8 @@
                 .getElementById("hours-in-day-main-div")
                 .appendChild(each_hour_forecast);
             }
+            document.getElementById("drop-down-menu-days").style.display =
+              "none";
             return;
           }
         }
@@ -2235,13 +3450,155 @@
         const weather_icon = document.createElement("img");
         weather_icon.setAttribute("src", setWeatherIcon(weather_code[index]));
         weather_icon.classList.add("each-day-img");
-
+        weather_icon.style.display = "block";
         daily_time_div.appendChild(daily_day_label);
         daily_time_div.appendChild(weather_icon);
         each_day_max_min_div.appendChild(day_max_temp);
         each_day_max_min_div.appendChild(day_min_temp);
         daily_time_div.appendChild(each_day_max_min_div);
         parentId.appendChild(daily_time_div);
+      };
+
+      const createDailyWeatherBlankElements = (parentId, index, divclass) => {
+        //small div elements in Daily forecast
+        const daily_time_div = document.createElement("div");
+        daily_time_div.setAttribute("id", `daily-forecast-day-${index}`);
+        daily_time_div.classList.add(divclass);
+
+        const daily_day_label = document.createElement("label");
+        daily_day_label.classList.add("each-day-label");
+        daily_day_label.innerText = "";
+
+        const each_day_max_min_div = document.createElement("div");
+        each_day_max_min_div.classList.add("each-day-max-min");
+
+        const day_max_temp = document.createElement("label");
+        const day_min_temp = document.createElement("label");
+        day_max_temp.classList.add("each-day-max");
+        day_min_temp.classList.add("each-day-min");
+        day_max_temp.innerText = "";
+        day_min_temp.innerText = "";
+
+        const weather_icon = document.createElement("img");
+        weather_icon.setAttribute("src", "");
+        weather_icon.classList.add("each-day-img");
+        weather_icon.style.display = "none";
+        daily_time_div.appendChild(daily_day_label);
+        daily_time_div.appendChild(weather_icon);
+        each_day_max_min_div.appendChild(day_max_temp);
+        each_day_max_min_div.appendChild(day_min_temp);
+        daily_time_div.appendChild(each_day_max_min_div);
+        parentId.appendChild(daily_time_div);
+      };
+
+      const createDailyWeatherBlankCard = () => {
+        daily_forecast_div_row1 = document.getElementById(
+          "daily-forecast-days-div-row1"
+        );
+        daily_forecast_div_row2 = document.getElementById(
+          "daily-forecast-days-div-row2"
+        );
+        daily_forecast_div_row3 = document.getElementById(
+          "daily-forecast-days-div-row3"
+        );
+        daily_forecast_div_row1.innerHTML = "";
+        daily_forecast_div_row2.innerHTML = "";
+        daily_forecast_div_row3.innerHTML = "";
+        document.getElementById("hours-in-day-main-div").innerHTML = "";
+
+        for (let j = 0; j < 3; j++) {
+          createDailyWeatherBlankElements(
+            daily_forecast_div_row1,
+            j,
+            "daily-forecast-day"
+          );
+        }
+
+        for (let j = 3; j < 6; j++) {
+          createDailyWeatherBlankElements(
+            daily_forecast_div_row2,
+            j,
+            "daily-forecast-day"
+          );
+        }
+        for (let j = 6; j < 7; j++) {
+          createDailyWeatherBlankElements(
+            daily_forecast_div_row3,
+            j,
+            "daily-forecast-last-day"
+          );
+        }
+      };
+      const createDailyWeatherCard = () => {
+        daily_forecast_div_row1 = document.getElementById(
+          "daily-forecast-days-div-row1"
+        );
+        daily_forecast_div_row2 = document.getElementById(
+          "daily-forecast-days-div-row2"
+        );
+        daily_forecast_div_row3 = document.getElementById(
+          "daily-forecast-days-div-row3"
+        );
+
+        daily_forecast_div_row1.innerHTML = "";
+        daily_forecast_div_row2.innerHTML = "";
+        daily_forecast_div_row3.innerHTML = "";
+        document.getElementById("hours-in-day-main-div").innerHTML = "";
+
+        for (let j = 0; j < 3; j++) {
+          createDailyWeatherElements(
+            daily_forecast_div_row1,
+            daily_time[j],
+            j,
+            "daily-forecast-day"
+          );
+        }
+
+        for (let j = 3; j < 6; j++) {
+          createDailyWeatherElements(
+            daily_forecast_div_row2,
+            daily_time[j],
+            j,
+            "daily-forecast-day"
+          );
+        }
+        for (let j = 6; j < 7; j++) {
+          createDailyWeatherElements(
+            daily_forecast_div_row3,
+            daily_time[j],
+            j,
+            "daily-forecast-last-day"
+          );
+        }
+      };
+
+      const createHourlyWeatherBlankCard = () => {
+        //hourly forecast for current day
+        let start_index = 0;
+        let end_index = 0;
+        let num_hours_in_day = 24;
+        let num_days_in_week = 7;
+        let day_in_num;
+
+        day_in_num = new Date(Date.now()).getDay();
+
+        document.getElementById(
+          "day_label_in_hourly_forecast_select"
+        ).innerText = "-";
+
+        for (let k = 0; k < 24; k++) {
+          let each_hour_forecast = document.createElement("div");
+          each_hour_forecast.classList.add("blank-each-hour-in-day");
+
+          document
+            .getElementById("hours-in-day-main-div")
+            .classList.add("blank-hours-in-day-main-div");
+          document
+            .getElementById("hours-in-day-main-div")
+            .appendChild(each_hour_forecast);
+        }
+        document.getElementById("drop-down-menu-days").style.display = "none";
+        return;
       };
       //Request to API Open-Meteo.com
       //---------------------------------------------------------------------------------------------------------------------
@@ -2252,21 +3609,99 @@
         );
 
         //current forecast API based on latitude & longitude above, timezone auto
-        forecast_result = await sendRequest(
-          `https://api.open-meteo.com/v1/forecast?latitude=${position_result.results[0].latitude}&longitude=${position_result.results[0].longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,precipitation,is_day,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_direction_10m,wind_gusts_10m`
-        );
+        if (localStorage.getItem("unit") === "metric") {
+          forecast_result = await sendRequest(
+            `https://api.open-meteo.com/v1/forecast?latitude=${position_result.results[0].latitude}&longitude=${position_result.results[0].longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,precipitation,is_day,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_direction_10m,wind_gusts_10m`
+          );
+        } else if (localStorage.getItem("unit") === "imperial") {
+          forecast_result = await sendRequest(
+            `https://api.open-meteo.com/v1/forecast?latitude=${position_result.results[0].latitude}&longitude=${position_result.results[0].longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,precipitation,is_day,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_direction_10m,wind_gusts_10m&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch`
+          );
+        }
 
+        console.log(forecast_result);
         //daily forecast API based on latitude & longitude above, timezone auto
-        daily_forecast_result = await sendRequest(
-          `https://api.open-meteo.com/v1/forecast?latitude=${position_result.results[0].latitude}&longitude=${position_result.results[0].longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min`
-        ); //forecast result
+        if (localStorage.getItem("unit") === "metric") {
+          daily_forecast_result = await sendRequest(
+            `https://api.open-meteo.com/v1/forecast?latitude=${position_result.results[0].latitude}&longitude=${position_result.results[0].longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min`
+          ); //forecast result
+        } else if (localStorage.getItem("unit") === "imperial") {
+          daily_forecast_result = await sendRequest(
+            `https://api.open-meteo.com/v1/forecast?latitude=${position_result.results[0].latitude}&longitude=${position_result.results[0].longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch`
+          ); //forecast result
+        }
 
+        console.log(daily_forecast_result);
         //hourly forecast API based on latitude & longitude above, timezone auto
-        hourly_forecast_result = await sendRequest(
-          `https://api.open-meteo.com/v1/forecast?latitude=${position_result.results[0].latitude}&longitude=${position_result.results[0].longitude}&hourly=temperature_2m,weather_code`
-        ); //forecast result
+        if (localStorage.getItem("unit") === "metric") {
+          hourly_forecast_result = await sendRequest(
+            `https://api.open-meteo.com/v1/forecast?latitude=${position_result.results[0].latitude}&longitude=${position_result.results[0].longitude}&hourly=temperature_2m,weather_code`
+          ); //forecast result
+        } else if (localStorage.getItem("unit") === "imperial") {
+          hourly_forecast_result = await sendRequest(
+            `https://api.open-meteo.com/v1/forecast?latitude=${position_result.results[0].latitude}&longitude=${position_result.results[0].longitude}&hourly=temperature_2m,weather_code&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch`
+          ); //forecast result
+        }
+        console.log(hourly_forecast_result);
+
+        if (!position_result) {
+          document.getElementById("loading-state").style.display = "flex";
+          document
+            .getElementById("today-small-div")
+            .classList.add("today-small-div-loading-state");
+          document
+            .getElementById("today-small-div")
+            .classList.remove("today-small-div");
+          document.getElementById("city-time-div").style.display = "none";
+          document.getElementById("today-icon-temp-div").style.display = "none";
+        } else {
+          document.getElementById("loading-state").style.display = "none";
+          document
+            .getElementById("today-small-div")
+            .classList.remove("today-small-div-loading-state");
+          document
+            .getElementById("today-small-div")
+            .classList.add("today-small-div");
+          document.getElementById("city-time-div").style.display = "flex";
+          document.getElementById("today-icon-temp-div").style.display = "flex";
+        }
       };
+
+      const storeCity = () => {
+        if (document.getElementById("city").value != "") {
+          let searchWord = localStorage.getItem("typedSearchWord");
+          searchWord = searchWord + "," + document.getElementById("city").value;
+          localStorage.setItem("typedSearchWord", searchWord);
+          let arr_sw = localStorage.getItem("typedSearchWord").split(",");
+          if (arr_sw.length > 5) {
+            localStorage.removeItem("typedSearchWord");
+            localStorage.setItem(
+              "typedSearchWord",
+              document.getElementById("city").value || ""
+            );
+          }
+        } else return;
+      };
+
       const search = async () => {
+        //display when in loading state
+        document.getElementById("loading-state").style.display = "flex"; //display loading state icon
+        document
+          .getElementById("today-small-div")
+          .classList.remove("today-small-div");
+        document
+          .getElementById("today-small-div")
+          .classList.add("today-small-div-loading-state");
+        document.getElementById("city-time-div").style.display = "none";
+        document.getElementById("today-icon-temp-div").style.display = "none";
+        document.getElementById("feels-like").innerText = "-";
+        document.getElementById("current-humid").innerText = "-";
+        document.getElementById("current-wind-speed").innerText = "-";
+        document.getElementById("current-precipitation").innerText = "-";
+
+        createDailyWeatherBlankCard();
+        createHourlyWeatherBlankCard();
+
         try {
           await callAPIReq(document.getElementById("city").value);
           //fill-in responses from current weather forecast API into DOM element
@@ -2310,43 +3745,224 @@
           //fill-in responses from daily weather forecast API into DOM element
           //---------------------------------------------------------------------------------------------------------------------------------
 
-          let daily_forecast_div_row1 = document.getElementById(
-            "daily-forecast-days-div-row1"
-          );
-          let daily_forecast_div_row2 = document.getElementById(
-            "daily-forecast-days-div-row2"
-          );
-          let daily_forecast_div_row3 = document.getElementById(
-            "daily-forecast-days-div-row3"
-          );
+          createDailyWeatherCard();
 
-          for (let j = 0; j < 3; j++) {
-            createDailyWeatherElements(
-              daily_forecast_div_row1,
-              daily_time[j],
-              j,
-              "daily-forecast-day"
-            );
-          }
-
-          for (let j = 3; j < 6; j++) {
-            createDailyWeatherElements(
-              daily_forecast_div_row2,
-              daily_time[j],
-              j,
-              "daily-forecast-day"
-            );
-          }
-          for (let j = 6; j < 7; j++) {
-            createDailyWeatherElements(
-              daily_forecast_div_row3,
-              daily_time[j],
-              j,
-              "daily-forecast-last-day"
-            );
-          }
+          document.getElementById("display-weather-results").style.display =
+            "block";
+          document.getElementById("no-search-result").style.display = "none";
         } catch (error) {
-          console.error(error.message);
+          document.getElementById("display-weather-results").style.display =
+            "none";
+          document.getElementById("no-search-result").style.display = "block";
+        }
+
+        //hourly forecast for current day
+        let start_index = 0;
+        let end_index = 0;
+        let num_hours_in_day = 24;
+        let num_days_in_week = 7;
+        let day_in_num;
+
+        day_in_num = new Date(Date.now()).getDay();
+
+        document.getElementById(
+          "day_label_in_hourly_forecast_select"
+        ).innerText = days_arr[day_in_num];
+
+        for (let j = start_index; j < num_days_in_week; j++) {
+          let day_num = new Date(hourly_time[j * 24]).getDay();
+
+          if (day_in_num === day_num) {
+            for (let k = j * 24; k < j * 24 + 24; k++) {
+              let each_hour_forecast = document.createElement("div");
+              each_hour_forecast.classList.add("each-hour-in-day");
+              let each_hour_weather_icon = document.createElement("img");
+              each_hour_weather_icon.classList.add("each-hour-in-day-img");
+              let each_hour_hour = document.createElement("label");
+              each_hour_hour.classList.add("each-hour-in-day-time");
+              let each_hour_temp = document.createElement("label");
+              each_hour_temp.classList.add("each-hour-in-day-temp");
+              each_hour_weather_icon.setAttribute(
+                "src",
+                setWeatherIcon(hourly_weather_code[k])
+              );
+              let ampm = "";
+              let hour12 = new Date(hourly_time[k]).getHours();
+              if (hour12 < 13) {
+                ampm = "AM";
+              } else {
+                hour12 -= 12;
+                ampm = "PM";
+              }
+              each_hour_hour.innerText = `${hour12} ${ampm}`;
+              each_hour_temp.innerText = "";
+              each_hour_temp.innerText = `${hourly_temp[k]}°`;
+              each_hour_forecast.appendChild(each_hour_weather_icon);
+              each_hour_forecast.appendChild(each_hour_hour);
+              each_hour_forecast.appendChild(each_hour_temp);
+
+              document
+                .getElementById("hours-in-day-main-div")
+                .appendChild(each_hour_forecast);
+            }
+            document.getElementById("drop-down-menu-days").style.display =
+              "none";
+            return;
+          }
+        }
+      };
+
+      //choose typed search word
+
+      const showTypedSearchWord = () => {
+        let ddsearchword = document.getElementById("drop-down-search-word-div");
+        let ddsearchword_inside = document.getElementById(
+          "drop-down-search-word-div-inside"
+        );
+        ddsearchword_inside.innerHTML = "";
+        let tempLS = localStorage.getItem("typedSearchWord");
+        let listCitiesName = tempLS.split(",");
+        for (let j = 0; j < listCitiesName.length; j++) {
+          let city_row_div = document.createElement("div");
+          city_row_div.innerText = listCitiesName[j];
+          city_row_div.classList.add("city-name-row-div");
+          city_row_div.setAttribute("id", `city${j}`);
+          city_row_div.addEventListener("click", function selectCity(event) {
+            let idElement = event.target.id;
+            let choosedCity = document.getElementById(`${idElement}`).innerHTML;
+            document.getElementById("city").value = choosedCity;
+            document.getElementById("drop-down-search-word-div").style.display =
+              "none";
+          });
+          ddsearchword_inside.appendChild(city_row_div);
+        }
+        ddsearchword.appendChild(ddsearchword_inside);
+        if (ddsearchword.style.display === "none") {
+          ddsearchword.style.display = "block";
+        } else {
+          ddsearchword.style.display = "none";
+        }
+      };
+      //choose days
+      const showDropDownDays = () => {
+        let dddays = document.getElementById("drop-down-menu-days");
+        if (dddays.style.display === "none") {
+          dddays.style.display = "block";
+        } else {
+          dddays.style.display = "none";
+        }
+      };
+
+      //choose unit
+      const showDropDownUnit = () => {
+        let ddmenu = document.getElementById("drop-down-menu-div");
+
+        if (ddmenu.style.display === "none") {
+          ddmenu.style.display = "block";
+        } else {
+          ddmenu.style.display = "none";
+        }
+
+        if (localStorage.getItem("unit") === "metric") {
+          switch_li.innerText = "Switch to Imperial";
+          document.getElementById("celcius").classList.add("active-unit");
+          document.getElementById("kmh").classList.add("active-unit");
+          document.getElementById("mm").classList.add("active-unit");
+          document.getElementById("fahrenheit").classList.remove("active-unit");
+          document.getElementById("mph").classList.remove("active-unit");
+          document.getElementById("inch").classList.remove("active-unit");
+          document.getElementById(
+            "fahrenheit"
+          ).lastElementChild.style.visibility = "hidden";
+          document.getElementById("mph").lastElementChild.style.visibility =
+            "hidden";
+          document.getElementById("inch").lastElementChild.style.visibility =
+            "hidden";
+          document.getElementById("celcius").lastElementChild.style.visibility =
+            "visible";
+          document.getElementById("kmh").lastElementChild.style.visibility =
+            "visible";
+          document.getElementById("mm").lastElementChild.style.visibility =
+            "visible";
+          return;
+        } else if (localStorage.getItem("unit") === "imperial") {
+          switch_li.innerText = "Switch to Metric";
+          document.getElementById("fahrenheit").classList.add("active-unit");
+          document.getElementById("mph").classList.add("active-unit");
+          document.getElementById("inch").classList.add("active-unit");
+          document.getElementById("celcius").classList.remove("active-unit");
+          document.getElementById("kmh").classList.remove("active-unit");
+          document.getElementById("mm").classList.remove("active-unit");
+          document.getElementById(
+            "fahrenheit"
+          ).lastElementChild.style.visibility = "visible";
+          document.getElementById("mph").lastElementChild.style.visibility =
+            "visible";
+          document.getElementById("inch").lastElementChild.style.visibility =
+            "visible";
+          document.getElementById("celcius").lastElementChild.style.visibility =
+            "hidden";
+          document.getElementById("kmh").lastElementChild.style.visibility =
+            "hidden";
+          document.getElementById("mm").lastElementChild.style.visibility =
+            "hidden";
+          return;
+        }
+      };
+      const switchUnit = () => {
+        let switch_li = document.getElementById("switch_li");
+
+        if (localStorage.getItem("unit") === "metric") {
+          localStorage.setItem("unit", "imperial");
+          search();
+          switch_li.innerText = "Switch to Metric";
+          document.getElementById("fahrenheit").classList.add("active-unit");
+          document.getElementById("mph").classList.add("active-unit");
+          document.getElementById("inch").classList.add("active-unit");
+          document.getElementById("celcius").classList.remove("active-unit");
+          document.getElementById("kmh").classList.remove("active-unit");
+          document.getElementById("mm").classList.remove("active-unit");
+          document.getElementById(
+            "fahrenheit"
+          ).lastElementChild.style.visibility = "visible";
+          document.getElementById("mph").lastElementChild.style.visibility =
+            "visible";
+          document.getElementById("inch").lastElementChild.style.visibility =
+            "visible";
+          document.getElementById("celcius").lastElementChild.style.visibility =
+            "hidden";
+          document.getElementById("kmh").lastElementChild.style.visibility =
+            "hidden";
+          document.getElementById("mm").lastElementChild.style.visibility =
+            "hidden";
+
+          document.getElementById("drop-down-menu-div").style.display = "none";
+          return;
+        } else if (localStorage.getItem("unit") === "imperial") {
+          localStorage.setItem("unit", "metric");
+          search();
+          switch_li.innerText = "Switch to Imperial";
+          document.getElementById("celcius").classList.add("active-unit");
+          document.getElementById("kmh").classList.add("active-unit");
+          document.getElementById("mm").classList.add("active-unit");
+          document.getElementById("fahrenheit").classList.remove("active-unit");
+          document.getElementById("mph").classList.remove("active-unit");
+          document.getElementById("inch").classList.remove("active-unit");
+          document.getElementById(
+            "fahrenheit"
+          ).lastElementChild.style.visibility = "hidden";
+          document.getElementById("mph").lastElementChild.style.visibility =
+            "hidden";
+          document.getElementById("inch").lastElementChild.style.visibility =
+            "hidden";
+          document.getElementById("celcius").lastElementChild.style.visibility =
+            "visible";
+          document.getElementById("kmh").lastElementChild.style.visibility =
+            "visible";
+          document.getElementById("mm").lastElementChild.style.visibility =
+            "visible";
+          document.getElementById("drop-down-menu-div").style.display = "none";
+          return;
         }
       };
     </script>

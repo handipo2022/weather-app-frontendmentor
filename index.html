@@ -298,11 +298,21 @@
         display: flex;
         flex-direction: column;
       }
+
       .each-hour-in-day {
         background-color: hsl(243, 23%, 30%);
         display: flex;
         flex-direction: row;
         align-items: center;
+      }
+      .blank-hours-in-day-main-div {
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+      }
+      .blank-each-hour-in-day {
+        background-color: hsl(243, 23%, 30%);
+        flex-shrink: 0;
       }
       .each-hour-in-day img {
         width: 12vw;
@@ -663,6 +673,20 @@
           height: 14vw;
           margin-top: 5vw;
         }
+        .blank-hours-in-day-main-div {
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+          width: 83vw;
+          height: 130vw;
+        }
+        .blank-each-hour-in-day {
+          border-radius: 2vw;
+          width: 83vw;
+          height: 6vw;
+          margin-top: 3vw;
+        }
+
         .each-hour-in-day img {
           width: 12vw;
           margin-left: 2vw;
@@ -1005,6 +1029,19 @@
           border-radius: 2vw;
           width: 80vw;
           height: 14vw;
+          margin-top: 5vw;
+        }
+        .blank-hours-in-day-main-div {
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+          width: 85vw;
+          height: 130vw;
+        }
+        .blank-each-hour-in-day {
+          border-radius: 2vw;
+          width: 80vw;
+          height: 6vw;
           margin-top: 5vw;
         }
         .each-hour-in-day img {
@@ -1353,6 +1390,19 @@
           height: 14vw;
           margin-top: 5vw;
         }
+        .blank-hours-in-day-main-div {
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+          width: 85vw;
+          height: 130vw;
+        }
+        .blank-each-hour-in-day {
+          border-radius: 2vw;
+          width: 80vw;
+          height: 7vw;
+          margin-top: 5vw;
+        }
         .each-hour-in-day img {
           width: 12vw;
           margin-left: 2vw;
@@ -1697,6 +1747,19 @@
           border-radius: 2vw;
           width: 80vw;
           height: 14vw;
+          margin-top: 5vw;
+        }
+        .blank-hours-in-day-main-div {
+          margin-left: 2vw;
+          margin-right: 2vw;
+          margin-top: 2vw;
+          width: 85vw;
+          height: 130vw;
+        }
+        .blank-each-hour-in-day {
+          border-radius: 2vw;
+          width: 80vw;
+          height: 8vw;
           margin-top: 5vw;
         }
         .each-hour-in-day img {
@@ -2047,6 +2110,22 @@
           height: 15vw;
           margin-top: 1vw;
         }
+        .blank-hours-in-day-main-div {
+          width: 24vw;
+          height: 45vw;
+          overflow-y: scroll;
+          margin-left: 2vw;
+          margin-right: 1vw;
+          margin-top: 2vw;
+          
+        }
+        .blank-each-hour-in-day {
+          border-radius: 0.5vw;
+          width: 24vw;
+          height: 3vw;
+          margin-top: 1vw;
+          
+        }
         .each-hour-in-day img {
           width: 3vw;
           margin-left: 1vw;
@@ -2390,6 +2469,20 @@
           border-radius: 0.5vw;
           width: 24vw;
           height: 15vw;
+          margin-top: 1vw;
+        }
+        .blank-hours-in-day-main-div {
+          width: 24vw;
+          height: 45vw;
+          overflow-y: scroll;
+          margin-left: 2vw;
+          margin-right: 1vw;
+          margin-top: 2vw;
+        }
+        .blank-each-hour-in-day {
+          border-radius: 0.5vw;
+          width: 24vw;
+          height: 3vw;
           margin-top: 1vw;
         }
         .each-hour-in-day img {
@@ -2736,6 +2829,22 @@
           margin-top: 1vw;
           justify-content: space-around;
         }
+        .blank-hours-in-day-main-div {
+          width: 24vw;
+          height: 45vw;
+          overflow-y: scroll;
+          margin-left: 2vw;
+          margin-right: 1vw;
+          margin-top: 2vw;
+        }
+        .blank-each-hour-in-day {
+          border-radius: 0.5vw;
+          width: 24vw;
+          height: 3vw;
+          margin-top: 1vw;
+          justify-content: space-around;
+        }
+
         .each-hour-in-day img {
           width: 3vw;
           margin-left: 1vw;
@@ -3089,6 +3198,10 @@
         hourly_temp,
         hourly_weather_code;
 
+      let daily_forecast_div_row1,
+        daily_forecast_div_row2,
+        daily_forecast_div_row3;
+
       const days_arr = [
         "Sunday",
         "Monday",
@@ -3114,8 +3227,10 @@
       ];
 
       const onLoad = () => {
+        //display blank card on load
+        createDailyWeatherBlankCard();
+        createHourlyWeatherBlankCard();
         localStorage.setItem("unit", "metric");
-        //  localStorage.removeItem("typedSearchWord");
         let savedSearchWord = localStorage.getItem("typedSearchWord");
         if (savedSearchWord === null) {
           localStorage.setItem("typedSearchWord", "");
@@ -3335,7 +3450,7 @@
         const weather_icon = document.createElement("img");
         weather_icon.setAttribute("src", setWeatherIcon(weather_code[index]));
         weather_icon.classList.add("each-day-img");
-
+        weather_icon.style.display = "block";
         daily_time_div.appendChild(daily_day_label);
         daily_time_div.appendChild(weather_icon);
         each_day_max_min_div.appendChild(day_max_temp);
@@ -3367,7 +3482,7 @@
         const weather_icon = document.createElement("img");
         weather_icon.setAttribute("src", "");
         weather_icon.classList.add("each-day-img");
-
+        weather_icon.style.display = "none";
         daily_time_div.appendChild(daily_day_label);
         daily_time_div.appendChild(weather_icon);
         each_day_max_min_div.appendChild(day_max_temp);
@@ -3377,13 +3492,13 @@
       };
 
       const createDailyWeatherBlankCard = () => {
-        let daily_forecast_div_row1 = document.getElementById(
+        daily_forecast_div_row1 = document.getElementById(
           "daily-forecast-days-div-row1"
         );
-        let daily_forecast_div_row2 = document.getElementById(
+        daily_forecast_div_row2 = document.getElementById(
           "daily-forecast-days-div-row2"
         );
-        let daily_forecast_div_row3 = document.getElementById(
+        daily_forecast_div_row3 = document.getElementById(
           "daily-forecast-days-div-row3"
         );
         daily_forecast_div_row1.innerHTML = "";
@@ -3415,13 +3530,13 @@
         }
       };
       const createDailyWeatherCard = () => {
-        let daily_forecast_div_row1 = document.getElementById(
+        daily_forecast_div_row1 = document.getElementById(
           "daily-forecast-days-div-row1"
         );
-        let daily_forecast_div_row2 = document.getElementById(
+        daily_forecast_div_row2 = document.getElementById(
           "daily-forecast-days-div-row2"
         );
-        let daily_forecast_div_row3 = document.getElementById(
+        daily_forecast_div_row3 = document.getElementById(
           "daily-forecast-days-div-row3"
         );
 
@@ -3455,6 +3570,35 @@
             "daily-forecast-last-day"
           );
         }
+      };
+
+      const createHourlyWeatherBlankCard = () => {
+        //hourly forecast for current day
+        let start_index = 0;
+        let end_index = 0;
+        let num_hours_in_day = 24;
+        let num_days_in_week = 7;
+        let day_in_num;
+
+        day_in_num = new Date(Date.now()).getDay();
+
+        document.getElementById(
+          "day_label_in_hourly_forecast_select"
+        ).innerText = "-";
+
+        for (let k = 0; k < 24; k++) {
+          let each_hour_forecast = document.createElement("div");
+          each_hour_forecast.classList.add("blank-each-hour-in-day");
+
+          document
+            .getElementById("hours-in-day-main-div")
+            .classList.add("blank-hours-in-day-main-div");
+          document
+            .getElementById("hours-in-day-main-div")
+            .appendChild(each_hour_forecast);
+        }
+        document.getElementById("drop-down-menu-days").style.display = "none";
+        return;
       };
       //Request to API Open-Meteo.com
       //---------------------------------------------------------------------------------------------------------------------
@@ -3556,6 +3700,8 @@
         document.getElementById("current-precipitation").innerText = "-";
 
         createDailyWeatherBlankCard();
+        createHourlyWeatherBlankCard();
+
         try {
           await callAPIReq(document.getElementById("city").value);
           //fill-in responses from current weather forecast API into DOM element
